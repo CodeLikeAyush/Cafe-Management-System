@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="landing.css">
+    <link rel="stylesheet" href="modal.css">
+
+    <title>Ayush Cafe</title>
+</head>
+
+
+<body id="landing_body">
+    <h1 id="landing_heading">AYUSH CAFE</h1>
+    <div id="landing_btn_div">
+        <button onclick="document.getElementById('id01').style.display='block'">login</button>
+        <button onclick="document.getElementById('id02').style.display='block'">signup</button>
+        <button onclick="document.getElementById('id03').style.display='block'">forgot password</button>
+    </div>
+
+    <%- include('../partials/login_modal'); %>
+        <%- include('../partials/signup_modal'); %>
+            <%- include('../partials/forgot_pass_modal'); %>
+
+                <script>
+                    // -- close modal script---------------------------------------------------------------------------- 
+                    // Get the modal
+                    var modal1 = document.getElementById('id01');
+                    var modal2 = document.getElementById('id02');
+                    var modal3 = document.getElementById('id03');
+
+
+                    // When the user clicks anywhere outside of the modal, close it
+                    window.onclick = function (event) {
+                        if (event.target == modal1) {
+                            modal1.style.display = "none";
+                        }
+                        if (event.target == modal2) {
+                            modal2.style.display = "none";
+                        }
+                        if (event.target == modal3) {
+                            modal3.style.display = "none";
+                        }
+                    }
+
+
+                </script>
+
+</body>
+
+</html>

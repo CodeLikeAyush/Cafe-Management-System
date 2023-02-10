@@ -1,0 +1,88 @@
+<div class="tab">
+    <button class="tablinks" onclick="openCity(event, 'Dashboard')" id="defaultOpen">Dashboard</button>
+    <button class="tablinks" onclick="openCity(event, 'Manage Products');fetchUsers()">Manage Products</button>
+    <button class="tablinks" onclick="openCity(event, 'Create Order')">Create Order</button>
+    <button class="tablinks" onclick="openCity(event, 'View Bills')">View Bills</button>
+    <button class="tablinks" onclick="openCity(event, 'Manage Users')">Manage Users</button>
+</div>-
+
+
+<div>
+    <div id="Dashboard" class="tabcontent row">
+
+        <div
+            style="border: 1px solid #ddd;padding: 12px;font-size: 18px;display: block;height: 60px;margin-bottom: 10px;">
+            <h2 style="float: left;font-weight: bold;color: green;">Admin Dashboard</h2>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <h2>Total Category:</h2>
+                <h3>10</h3>
+                <button type="button" class="card_btn">View Categories</button>
+            </div>
+        </div>
+        <div class="column">
+            <div class="card">
+                <h2>Total Products:</h2>
+                <h3>10</h3>
+                <button type="button" class="card_btn">View Products</button>
+            </div>
+        </div>
+        <div class="column">
+            <div class="card">
+                <h2>Total Bills:</h2>
+                <h3>10</h3>
+                <button type="button" class="card_btn">View Bills</button>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <div id="Manage Products" class="tabcontent">
+
+        <div
+            style="border: 1px solid #ddd;padding: 12px;font-size: 18px;display: block;height: 60px;margin-bottom: 10px;">
+            <h2 style="float: left;font-weight: bold;color: green;">Manage Products</h2>
+            <button
+                style="float: right;font-weight: bold;margin-right: 80px;width: auto;padding: 10px 18px;background-color: green;color: white; border: none;cursor: pointer;">Add
+                Category
+            </button>
+
+        </div>
+        <input type="text" id="myInput" onkeyup="filterCategory()" placeholder="Search for names.."
+            title="Type in a name">
+        <%- include('../partials/manage_categ_table'); %>
+
+
+
+    </div>
+
+    <div id="Create Order" class="tabcontent">
+        <div
+            style="border: 1px solid #ddd;padding: 12px;font-size: 18px;display: block;height: 60px;margin-bottom: 10px;">
+            <h2 style="float: left;font-weight: bold;color: green;">Create Order</h2>
+        </div>
+    </div>
+    <div id="View Bills" class="tabcontent">
+        <div
+            style="border: 1px solid #ddd;padding: 12px;font-size: 18px;display: block;height: 60px;margin-bottom: 10px;">
+            <h2 style="float: left;font-weight: bold;color: green;">View Bills</h2>
+        </div>
+    </div>
+
+
+    <div id="Manage Users" class="tabcontent">
+        <div
+            style="border: 1px solid #ddd;padding: 12px;font-size: 18px;display: block;height: 60px;margin-bottom: 10px;">
+            <h2 style="float: left;font-weight: bold;color: green;">Manage Users</h2>
+        </div>
+
+
+    </div>
+
+
+
+</div>

@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#landing_body {
+    font-family: Arial, Helvetica, sans-serif;
+
+    background-image: url('https://i0.wp.com/explorebiotech.com/wp-content/uploads/2016/10/shutterstock_197301452_web.jpg?fit=1348%2C899&ssl=1');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-size: 100% 100%;
+    overflow: hidden;
+}
+
+#landing_btn_div {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(0 0 0 / 77%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button {
+    height: 43px;
+    width: 16%;
+    margin: 53px;
+    background-color: rgb(0, 97, 11);
+    outline: none;
+    font-weight: bold;
+    border: none;
+    transition-duration: 500ms;
+    border-radius: 0.5em;
+    color: white;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: green;
+    scale: 1.01;
+}
+
+#landing_heading {
+    position: fixed;
+    top: 100px;
+    display: block;
+    width: 100vw;
+    text-align: center;
+    color: white;
+    font-size: 60px;
+    line-height: 100px;
+    font-weight: bolder;
+}

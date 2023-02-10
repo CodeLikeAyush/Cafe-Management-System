@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- fonts: -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- google material icons -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <link rel="stylesheet" href="/navbar.css">
+    <link rel="stylesheet" href="/leftTab.css">
+    <link rel="stylesheet" href="/card.css">
+    <link rel="stylesheet" href="/manage_cat_list_filter.css">
+    <link rel="stylesheet" href="/delt_edit_icon.css">
+    <link rel="stylesheet" href="/table.css">
+    <link rel="stylesheet" href="/toggle_btn.css">
+    <title>Admin Dashboard</title>
+</head>
+
+<body>
+    <%- include('../partials/navbar'); %>
+        <%- include('../partials/verticalTab'); %>
+
+            <!--++++++++++++++++++++++++++++++Script for left vertical tab++++++++++++++++++++++++++++++++++ -->
+            <script>
+                function openCity(evt, cityName) {
+                    var i, tabcontent, tablinks;
+                    tabcontent = document.getElementsByClassName("tabcontent");
+                    for (i = 0; i < tabcontent.length; i++) {
+                        tabcontent[i].style.display = "none";
+                    }
+                    tablinks = document.getElementsByClassName("tablinks");
+                    for (i = 0; i < tablinks.length; i++) {
+                        tablinks[i].className = tablinks[i].className.replace(" active", "");
+                    }
+                    document.getElementById(cityName).style.display = "block";
+                    evt.currentTarget.className += " active";
+                }
+
+                // Get the element with id="defaultOpen" and click on it
+                document.getElementById("defaultOpen").click();
+            </script>
+
+            <!-- ++++++++++++++++++++++++++++manage-category-table-list-filter-script+++++++++++++++++++++++++++++++++++++ -->
+            <script>
+                function filterCategory() {
+                    var input, filter, table, tr, td, i, txtValue;
+                    input = document.getElementById("myInput");
+                    filter = input.value.toUpperCase();
+                    table = document.getElementById("myTable");
+                    tr = table.getElementsByTagName("tr");
+                    for (i = 0; i < tr.length; i++) {
+                        td = tr[i].getElementsByTagName("td")[0];
+                        if (td) {
+                            txtValue = td.textContent || td.innerText;
+                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                            } else {
+                                tr[i].style.display = "none";
+                            }
+                        }
+                    }
+                }
+            </script>
+            <!-- ++++++++++++++++++++++++++++++++++++++++++++++++fetch all users script++++++++++++++++++++++++++++++++++++++++++++++++ -->
+            <script>
+                async function fetchUsers(event) {
+                    try {
+                        let res = await fetch("/admin//dashboard/get_all_users");
+                        let data = await res.json();
+
+                        const products = data.products;
+
+                        let str1 =
+                            `<tr class="header">
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Description</th>
+                                <th>Price ( &#8377; )</th>
+                                <th>Action</th>
+                        </tr>`;
+
+                        products.forEach(product => {
+
+                            str2 =
+                                `<tr id=${product.product_id} class = "prod">
+                                     <td>${product.product_name.toUpperCase()}</td>
+                                     <td>${product.category_name.toUpperCase()}</td>
+                                     <td>${product.product_description.toUpperCase()}</td>
+                                     <td>${product.price}</td>
+                                     <td>
+                                        <div style="display: flex;">
+                                            <label class="switch"><input type="checkbox" ${product.in_stock?"checked":" "}><span class="slider round"></span></label>
+                                            <span class="material-symbols-outlined delt_icon">delete</span>
+                                            <span class="material-symbols-outlined edit_icon">edit</span>
+                                        </div>
+                                    </td>
+                                </tr>`;
+
+                            str1 += str2;
+
+                        });
+
+                        document.getElementById("myTable").innerHTML = str1;
+
+                    } catch (err) {
+                        console.log(err)
+                    }
+
+                }
+            </script>
+</body>
+
+</html>

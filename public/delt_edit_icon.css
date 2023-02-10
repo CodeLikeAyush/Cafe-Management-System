@@ -1,0 +1,10 @@
+        /* delete & edit icon styling--------------------------------------------------------- */
+        .delt_icon,
+        .edit_icon {
+            cursor: pointer;
+        }
+
+        .delt_icon:hover,
+        .edit_icon:hover {
+            color: red;
+        }
