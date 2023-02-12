@@ -3,7 +3,6 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
-// var multer = require('multer');
 const cookieParser = require('cookie-parser');
 
 
@@ -17,7 +16,6 @@ const logoutRoute = require('./routes/logout');
 const verify = require('./verify');
 
 
-// var upload = multer();
 const app = express();
 const port = process.env.PORT || 4000;
 

@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" href="landing.css">
-    <link rel="stylesheet" href="modal.css">
+    <link rel="stylesheet" href="/landing.css">
+    <link rel="stylesheet" href="/modal.css">
 
     <title>Ayush Cafe</title>
 </head>
@@ -26,29 +26,9 @@
         <%- include('../partials/signup_modal'); %>
             <%- include('../partials/forgot_pass_modal'); %>
 
-                <script>
-                    // -- close modal script---------------------------------------------------------------------------- 
-                    // Get the modal
-                    var modal1 = document.getElementById('id01');
-                    var modal2 = document.getElementById('id02');
-                    var modal3 = document.getElementById('id03');
+                <!-- modal window script -->
+                <script src="/JS/close_modal.js"></script>
 
-
-                    // When the user clicks anywhere outside of the modal, close it
-                    window.onclick = function (event) {
-                        if (event.target == modal1) {
-                            modal1.style.display = "none";
-                        }
-                        if (event.target == modal2) {
-                            modal2.style.display = "none";
-                        }
-                        if (event.target == modal3) {
-                            modal3.style.display = "none";
-                        }
-                    }
-
-
-                </script>
 
 </body>
 

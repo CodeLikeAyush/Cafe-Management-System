@@ -1,0 +1,26 @@
+
+// < !-- +++++++++++++++++++++++++++++++++++++++++++ Toggle inStock script+++++++++++++++++++++++++++++++++++++ -->
+async function toggleStock(event) {
+    const inStock = event.target.checked;
+    const id = event.target.parentElement.parentElement.children[0].children[0].innerText;
+
+    // console.log(id)
+    // console.log(inStock)
+    try {
+        const rawResponse = await fetch('/admin/dashboard/manage_product/toggleStock', {
+            method: 'PATCH',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ inStock: inStock, id: id })
+        });
+        const content = await rawResponse.json();
+
+        console.log(content);
+    } catch (err) {
+        console.log(err)
+    }
+
+
+}

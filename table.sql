@@ -17,7 +17,7 @@ insert into users (name,contactNumber,email,password,status,role) VALUES('Ayush 
 
 create table prod_category(
     category_id int primary key AUTO_INCREMENT,
-    category_name varchar(255) NOT NULL
+    category_name varchar(255) NOT NULL UNIQUE
 );
 
 insert into prod_category (category_name) VALUES ("cold drink");
@@ -25,6 +25,7 @@ insert into prod_category (category_name) VALUES ("meal");
 insert into prod_category (category_name) VALUES ("breakfast");
 insert into prod_category (category_name) VALUES ("snacks");
 insert into prod_category (category_name) VALUES ("starter");
+insert into prod_category (category_name) VALUES ("sweets");
 
 
 create table products(
@@ -44,7 +45,20 @@ insert into products (product_name,product_category,in_stock,product_description
 insert into products (product_name,product_category,in_stock,product_description,price) VALUES ("thali",2,false,"thali with mattar panir",100.00);
 
 
-
-SELECT products.product_id, products.product_name, prod_category.category_name, products.product_description, products.price, products.in_stock
+-- getting products for manage product table=======================
+SELECT products.product_id, products.product_name, prod_category.category_name,prod_category.category_id, products.product_description, products.price, products.in_stock
 FROM products
 INNER JOIN prod_category ON products.product_category = prod_category.category_id;
+
+
+
+update products
+set in_stock = false
+where product_id = 3;
+
+
+-- Deleting product from manage product:==================================
+delete from products where product_id = 5;
+
+-- Updating/edit product++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ update products set product_name = "masala dosa",product_description = "aaaa",price = 100,product_category = (select category_id from prod_category where category_name = "breakfast") where product_id = 54;

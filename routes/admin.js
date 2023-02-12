@@ -4,17 +4,248 @@ const secretKey = require('../secretKey');
 const verify = require('../verify');
 
 const express = require('express');
-const jwt = require('jsonwebtoken');
+var multer = require('multer');
+var upload = multer();
+
+// const jwt = require('jsonwebtoken');
 
 
 
 
 const route = express.Router();
-
+// +++++++++++++++++++++++++++++++++++Dashboard++++++++++++++++++++++++++++++++++++++++++++++++
 route.get('/dashboard', verify, async (req, res) => {
-    // res.status(200).json({ message: "HI admin" })
-    res.render("pages/admin_dashboard");
+    let query = 'select COUNT(distinct cat.category_id) as cat_count,COUNT(distinct prod.product_id) as prod_count from prod_category as cat, products as prod'
+
+    connection.query(query, (err, results, fields) => {
+        if (!err) {
+            res.render("pages/admin_dashboard", { prod_count: results[0].prod_count, categ_count: results[0].cat_count });
+        } else {
+            console.log(err)
+            return res.status(500).json(err);
+        }
+    })
 })
+
+// +++++++++++++++++++++++++++++++++++++++++++/dashboard/manage_product++++++++++++++++++++++++++++++
+route.get('/dashboard', verify, async (req, res) => {
+    let query = 'select COUNT(distinct cat.category_id) as cat_count,COUNT(distinct prod.product_id) as prod_count from prod_category as cat, products as prod'
+
+    connection.query(query, (err, results, fields) => {
+        if (!err) {
+            res.render("pages/admin_dashboard", { prod_count: results[0].prod_count, categ_count: results[0].cat_count });
+        } else {
+            console.log(err)
+            return res.status(500).json(err);
+        }
+    })
+})
+
+// +++++++++++++++++++++++++++++++++++++++++++/dashboard/manage_product++++++++++++++++++++++++++++++
+route.get('/dashboard/manage_product', async (req, res) => {
+    // let query = 'select * from products'
+    let query = 'SELECT products.product_id, products.product_name, prod_category.category_name, prod_category.category_id, prod_category.category_id, products.product_description, products.price, products.in_stock FROM products INNER JOIN prod_category ON products.product_category = prod_category.category_id'
+
+    connection.query(query, (err, results, fields) => {
+        // console.log(results)
+        if (!err) {
+            res.json(results);
+        }
+        else {
+            console.log(err)
+            return res.status(500).json(err);
+        }
+    })
+})
+
+//+++++++++++++++++++++++++++++++++++++toggle inStock+++++++++++++++++++++++++++++++++++++++++++++
+route.patch('/dashboard/manage_product/toggleStock', verify, async (req, res) => {
+    // console.log(req.body)
+    // const 
+    let query = 'update products set `in_stock` = ? where `product_id` = ?;'
+
+    connection.query(query, [req.body.inStock, req.body.id], (err, results, fields) => {
+        if (!err) {
+            console.log(results)
+            res.json(results);
+        }
+        else {
+            console.log(err)
+            return res.status(500).json(err);
+        }
+    })
+    // res.status(200).json({ message: req.body })
+    // console.log(req.url)
+    // res.send(req.url)
+
+})
+//+++++++++++++++++++++++++++++++++++++delete product+++++++++++++++++++++++++++++++++++++++++++++
+route.delete('/dashboard/manage_product/delete_product', verify, async (req, res) => {
+    console.log(req.body)
+    let query = 'delete from products where `product_id` = ?;'
+
+    connection.query(query, [req.body.prod_id], (err, results, fields) => {
+        if (!err) {
+            console.log(results)
+            res.json(results);
+        }
+        else {
+            console.log(err)
+            return res.status(500).json(err);
+        }
+    })
+
+
+})
+
+route.get('/dashboard/manage_product/edit_prod', async (req, res) => {
+    let query = 'select prod_category.category_id,prod_category.category_name from prod_category'
+
+    connection.query(query, (err, results, fields) => {
+        // console.log(results)
+        if (!err) {
+
+            // let category = []
+            // results.forEach(element => {
+            //     console.log(element.category_name);
+            // });
+            res.json(results)
+        }
+        else {
+            console.log(err);
+        }
+    })
+})
+route.post('/dashboard/manage_product/edit_prod', upload.fields([]), async (req, res) => {
+
+    const prod_id = req.body.id;
+    const prod_name = (req.body.name).toLocaleUpperCase();
+    const prod_categ = (req.body.category).toLocaleUpperCase();
+    const prod_desc = (req.body.description).toLocaleUpperCase();
+    const prod_price = req.body.price;
+
+    let query = 'update products set `product_name` = ?,`product_description` = ?,`price` = ?,`product_category` = (select category_id from prod_category where `category_name` = ?) where product_id = ?'
+
+    connection.query(query, [prod_name, prod_desc, prod_price, prod_categ, prod_id], (err, results, fields) => {
+        if (!err) {
+            console.log(results)
+            res.json({ message: "update" })
+
+        }
+        else {
+            console.log(err)
+            res.json({ message: err })
+        }
+    })
+
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //++++++++++++++++++++++++++++++++++++++admin signup+++++++++++++++++++++++++++++++++++++++++++++++
 route.post('/signup', async (req, res) => {
@@ -72,6 +303,8 @@ route.post('/signup', async (req, res) => {
         res.status(400).send("Error at try-catch of /admin/register:" + err);
     }
 })
+
+
 
 // //+++++++++++++++++++++++++++++++++++++++++admin login+++++++++++++++++++++++++++++++++++++++++++++++
 // route.post('/login', verify, (req, res) => {
@@ -132,25 +365,10 @@ route.post('/forgotpassword', (req, res) => {
 })
 
 
-//+++++++++++++++++++++++++++++++++++++get all product+++++++++++++++++++++++++++++++++++++++++++++
-route.get('/dashboard/get_all_users', verify, async (req, res) => {
 
-    let query = 'SELECT products.product_id, products.product_name, prod_category.category_name, products.product_description, products.price, products.in_stock, product_description, products.price, products.in_stock FROM products INNER JOIN prod_category ON products.product_category = prod_category.category_id'
 
-    connection.query(query, (err, results, fields) => {
-        if (!err) {
-            // console.log(results)
-            if (results.length <= 0) {
-                return res.status(200).json({ productCount: 0, products: results })
-            } else {
-                return res.status(200).json({ productCount: results.length, products: results })
-            }
-        } else {
-            console.log(err)
-            return res.status(500).json(err);
-        }
-    })
-})
+
+
 //+++++++++++++++++++++++++++++++++++++update status of user+++++++++++++++++++++++++++++++++++++++++++++
 route.patch('/updateuserstatus', (req, res) => {
     let user = req.body;

@@ -1,0 +1,40 @@
+<div id="id04" class="modal">
+    <span class=""></span>
+    <span onclick="document.getElementById('id02').style.display='none'" class="close"
+        title="Close Modal">&times;</span>
+    <h1>Edit Product</h1>
+    <form id="edit_prod_form_" class="modal-content animate" action="#">
+        <div class="container">
+
+            <div id="edit_modal_prod_info">
+                <span></span>
+            </div>
+
+            <label for="name"><b>Product Name</b></label>
+            <input type="text" placeholder="Enter Name" name="name" id="prod_name" required>
+
+            <div id="dropdown">
+                <label for="category"><b>Category</b></label>
+                <input list="categ_list" id="category" name="category" required placeholder="Pick Category"
+                    style="height: 40px;padding: 19px;width: 100%;border: 1px solid #0000004a;margin-left: 1px;margin-top: 5px;margin-bottom: 10px;">
+
+                <datalist id="categ_list">
+                    <!-- here all the category options will be injected through javascript -->
+                </datalist>
+            </div>
+
+            <label for="description"><b>Description</b></label>
+            <input type="text" id="desc" placeholder="Enter Description" name="description">
+
+            <label for="price"><b>Price</b></label>
+            <input type="number" id="price" placeholder="Enter Price" name="price" required>
+
+
+            <div class="clearfix">
+                <button type="button" onclick="document.getElementById('id04').style.display='none'"
+                    class="cancelbtn">Cancel</button>
+                <button type="submit" class="signupbtn"
+                    style="height: 36px;width:75px;background-color: green;color: white;border: none;cursor: pointer;">Update</button>
+            </div>
+        </div>
+    </form>

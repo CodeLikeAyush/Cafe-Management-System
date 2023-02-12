@@ -11,7 +11,7 @@ body {
     float: left;
     width: 25%;
     padding: 0 10px;
-    margin:auto
+    margin: auto
 }
 
 /* Remove extra left and right margins, due to padding */
@@ -37,18 +37,25 @@ body {
 
 /* Style the counter cards */
 .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0 12px 28px 0 rgb(5 3 3 / 98%); */
     padding: 16px;
     text-align: center;
     margin: 103px 5px;
-    background-color: #f1f1f1;
-    height: 192px;
+    background-color: green;
+    color: white;
+    height: 220px;
+    width: 220px;
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    border-radius: 100%;
+    /* border: 6px solid red; */
 }
-
+.card:hover{
+    scale: 1.01;
+    cursor: pointer;
+}
 .card_btn {
     width: 100%;
     padding: 14px 20px;

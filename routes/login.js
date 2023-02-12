@@ -33,8 +33,8 @@ route.post('/', (req, res) => {
                 const accessToken = jwt.sign(response, process.env.ACCESS_TOKEN, { expiresIn: '12h' })
 
                 // res.status(200).json({ token: accessToken });
-                res.cookie("token", accessToken, { maxAge: 360000 })
-                res.cookie("role", results[0].role, { maxAge: 360000 })
+                res.cookie("token", accessToken, { maxAge: 3600000 })
+                res.cookie("role", results[0].role, { maxAge: 3600000 })
 
                 if (results[0].role == 'admin') {
                     res.redirect("/admin/dashboard");
