@@ -28,8 +28,8 @@ function alert(status, message) {
             danger_alert.style.opacity = "0"
             setTimeout(() => {
                 danger_alert.style.display = "none";
-            }, 600);
-        }, 600);
+            }, 1000);
+        }, 1000);
         danger_alert.style.opacity = "initial"
         danger_alert.style.display = "initial"
     }
@@ -41,8 +41,8 @@ function alert(status, message) {
             success_alert.style.opacity = "0"
             setTimeout(() => {
                 success_alert.style.display = "none";
-            }, 600);
-        }, 600);
+            }, 1000);
+        }, 1000);
         success_alert.style.opacity = "initial"
         success_alert.style.display = "initial"
     }
@@ -54,8 +54,8 @@ function alert(status, message) {
             info_alert.style.opacity = "0"
             setTimeout(() => {
                 info_alert.style.display = "none";
-            }, 600);
-        }, 600);
+            }, 1000);
+        }, 1000);
         info_alert.style.opacity = "initial"
         info_alert.style.display = "initial"
     }
@@ -67,8 +67,8 @@ function alert(status, message) {
             warning_alert.style.opacity = "0"
             setTimeout(() => {
                 warning_alert.style.display = "none";
-            }, 600);
-        }, 600);
+            }, 1000);
+        }, 1000);
         warning_alert.style.opacity = "initial"
         warning_alert.style.display = "initial"
     }

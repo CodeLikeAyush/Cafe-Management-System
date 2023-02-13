@@ -1,8 +1,11 @@
 
-const frm = document.querySelector("#edit_prod_form_");
-frm.addEventListener('submit', async (event) => {
+const edit_prod_form = document.querySelector("#edit_prod_form");
+edit_prod_form.addEventListener('submit', async (event) => {
+    
+    console.log()
+
     event.preventDefault();
-    let formdata = new FormData(frm);
+    let formdata = new FormData(edit_prod_form);
     const prod_id = document.getElementById("edit_modal_prod_info").children[0].innerText;
     formdata.append("id", prod_id);
     // console.log([...(formdata.entries())])
@@ -27,7 +30,7 @@ frm.addEventListener('submit', async (event) => {
 
         document.getElementById('id04').style.display = 'none';
 
-        console.log(content);
+        // console.log(content);
         alert(content.status, content.message);
 
     } catch (err) {

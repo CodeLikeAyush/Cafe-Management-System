@@ -67,7 +67,13 @@ route.patch('/dashboard/manage_product/toggleStock', verify, async (req, res) =>
     connection.query(query, [req.body.inStock, req.body.id], (err, results, fields) => {
         if (!err) {
             console.log(results)
-            res.json({ status: "success", message: "Product Stock Updated..." })
+            if (req.body.inStock) {
+                res.json({ status: "success", message: "In Stock..." })
+            }
+            else {
+                res.json({ status: "info", message: "Out of Stock..." })
+
+            }
 
         }
         else {
@@ -98,6 +104,35 @@ route.delete('/dashboard/manage_product/delete_product', verify, async (req, res
 
 
 })
+
+// add new product:+++++++++++++++++++++++++++++++++++++++++++++++++++
+route.post('/dashboard/manage_product/add_prod', upload.fields([]), async (req, res) => {
+
+    // const prod_id = req.body.id;
+    const prod_name = (req.body.name).toLocaleUpperCase();
+    const prod_categ = (req.body.category).toLocaleUpperCase();
+    const prod_desc = (req.body.description).toLocaleUpperCase();
+    const prod_price = req.body.price;
+
+    let query = 'insert into products (`product_name`,`product_category`,in_stock,`product_description`,`price`) VALUES (?,(select category_id from prod_category where category_name = ?),true,?,?)'
+
+    connection.query(query, [prod_name, prod_categ, prod_desc, prod_price], (err, results, fields) => {
+        if (!err) {
+            console.log(results)
+            res.json({ status: "success", message: "Product added...", prod_id: results.insertId })
+
+        }
+        else {
+            console.log(err)
+            res.json({ status: "danger", message: `${prod_name} already exists` })
+
+        }
+    })
+
+
+})
+
+
 
 route.get('/dashboard/manage_product/edit_prod', async (req, res) => {
     let query = 'select prod_category.category_id,prod_category.category_name from prod_category'

@@ -30,7 +30,7 @@ insert into prod_category (category_name) VALUES ("sweets");
 
 create table products(
     product_id int primary key AUTO_INCREMENT,
-    product_name varchar(255) NOT NULL,
+    product_name varchar(255) UNIQUE NOT NULL,
     product_category int NOT NULL,
     in_stock bool NOT NULL,
     product_description varchar(255) DEFAULT 'tasty',
@@ -62,3 +62,7 @@ delete from products where product_id = 5;
 
 -- Updating/edit product++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  update products set product_name = "masala dosa",product_description = "aaaa",price = 100,product_category = (select category_id from prod_category where category_name = "breakfast") where product_id = 54;
+
+-- adding product++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+insert into products (product_name,product_category,in_stock,product_description,price) VALUES ("BANANA",(select category_id from prod_category where category_name = "FRUIT"),true,"BEST BANANA",50);
