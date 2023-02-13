@@ -38,11 +38,11 @@ create table products(
     CONSTRAINT fk_prod_belongs_to_catog FOREIGN KEY (product_category) REFERENCES prod_category(category_id) 
 );
 
-insert into products (product_name,product_category,in_stock,product_description,price) VALUES ("orange juice",1,true,"ice chilled orange juice",50.00);
-insert into products (product_name,product_category,in_stock,product_description,price) VALUES ("papaya juice",1,true,"ice chilled papaya juice",50.00);
-insert into products (product_name,product_category,in_stock,product_description,price) VALUES ("golgappe",4,true,"mint flavoured",30.00);
-insert into products (product_name,product_category,in_stock,product_description,price) VALUES ("dosa",3,true,"masala dosa",60.00);
-insert into products (product_name,product_category,in_stock,product_description,price) VALUES ("thali",2,false,"thali with mattar panir",100.00);
+insert into products (product_name,product_category,in_stock,product_description,price) VALUES ("ORANGE JUICE",1,true,"ICE CHILLED ORANGE JUICE",50.00);
+insert into products (product_name,product_category,in_stock,product_description,price) VALUES ("PAPAYA JUICE",1,true,"ICE CHILLED PAPAYA JUICE",50.00);
+insert into products (product_name,product_category,in_stock,product_description,price) VALUES ("GOLGAPPE",4,true,"MINT FLAVOURED",30.00);
+insert into products (product_name,product_category,in_stock,product_description,price) VALUES ("DOSA",3,true,"MASALA DOSA",60.00);
+insert into products (product_name,product_category,in_stock,product_description,price) VALUES ("THALI",2,false,"THALI WITH MATTAR PANIR",100.00);
 
 
 -- getting products for manage product table=======================

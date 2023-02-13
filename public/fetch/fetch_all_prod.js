@@ -19,7 +19,7 @@ async function fetchProducts(event) {
         // we are appending other data rows of the table into str2:
         products.forEach(product => {
             str2 =
-                `<tr id=${product.product_id} class = "prod">
+                `<tr id="prod_tr_${product.product_id}" class = "prod">
                          <td>${product.product_name.toUpperCase()}</td>
                          <td>${product.category_name.toUpperCase()}</td>
                          <td>${product.product_description.toUpperCase()}</td>

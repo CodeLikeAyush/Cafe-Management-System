@@ -55,6 +55,6 @@ app.get('/', verify, function (req, res) {
     }
 
 })
-app.listen(port, () => console.log(`Server is running on port: ${port}`));
+app.listen(port, () => console.log(`Server is online at: http://localhost:${port}`));
 
 module.exports = app;

@@ -87,11 +87,11 @@ route.delete('/dashboard/manage_product/delete_product', verify, async (req, res
     connection.query(query, [req.body.prod_id], (err, results, fields) => {
         if (!err) {
             console.log(results)
-            res.json(results);
+            res.json({ status: "info", message: "Product Deleted..." })
         }
         else {
             console.log(err)
-            return res.status(500).json(err);
+            res.json({ status: "error", message: "Product Deletion Failed..." })
         }
     })
 
@@ -104,15 +104,14 @@ route.get('/dashboard/manage_product/edit_prod', async (req, res) => {
     connection.query(query, (err, results, fields) => {
         // console.log(results)
         if (!err) {
-
-            // let category = []
-            // results.forEach(element => {
-            //     console.log(element.category_name);
-            // });
             res.json(results)
+            // res.json({ status: "success", message: "Product Stock Updated..." })
+
         }
         else {
             console.log(err);
+            // res.json({ status: "error", message: "Product Stock Update Failed..." })
+
         }
     })
 })
@@ -129,12 +128,14 @@ route.post('/dashboard/manage_product/edit_prod', upload.fields([]), async (req,
     connection.query(query, [prod_name, prod_desc, prod_price, prod_categ, prod_id], (err, results, fields) => {
         if (!err) {
             console.log(results)
-            res.json({ message: "update" })
+            res.json({ status: "success", message: "Product Updated..." })
 
         }
         else {
             console.log(err)
             res.json({ message: err })
+            res.json({ status: "error", message: "Product Update Failed..." })
+
         }
     })
 
