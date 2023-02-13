@@ -28,6 +28,8 @@ frm.addEventListener('submit', async (event) => {
         document.getElementById('id04').style.display = 'none';
 
         console.log(content);
+        alert(content.status, content.message);
+
     } catch (err) {
         console.log(err)
     }

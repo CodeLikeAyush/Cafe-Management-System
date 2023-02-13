@@ -13,8 +13,11 @@ async function delete_product(event) {
         });
         const content = await rawResponse.json();
 
-        // console.log(content);
         (event.target.parentElement.parentElement.parentElement).style.display = "none";
+
+        alert(content.status, content.message);
+        console.log(content);
+
     } catch (err) {
         console.log(err)
     }

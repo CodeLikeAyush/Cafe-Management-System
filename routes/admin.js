@@ -67,11 +67,12 @@ route.patch('/dashboard/manage_product/toggleStock', verify, async (req, res) =>
     connection.query(query, [req.body.inStock, req.body.id], (err, results, fields) => {
         if (!err) {
             console.log(results)
-            res.json(results);
+            res.json({ status: "success", message: "Product Stock Updated..." })
+
         }
         else {
             console.log(err)
-            return res.status(500).json(err);
+            res.json({ status: "danger", message: "Product Stock Update Failed..." })
         }
     })
     // res.status(200).json({ message: req.body })
@@ -87,11 +88,11 @@ route.delete('/dashboard/manage_product/delete_product', verify, async (req, res
     connection.query(query, [req.body.prod_id], (err, results, fields) => {
         if (!err) {
             console.log(results)
-            res.json({ status: "info", message: "Product Deleted..." })
+            res.json({ status: "warning", message: "Product Deleted..." })
         }
         else {
             console.log(err)
-            res.json({ status: "error", message: "Product Deletion Failed..." })
+            res.json({ status: "danger", message: "Product Deletion Failed..." })
         }
     })
 
@@ -134,7 +135,7 @@ route.post('/dashboard/manage_product/edit_prod', upload.fields([]), async (req,
         else {
             console.log(err)
             res.json({ message: err })
-            res.json({ status: "error", message: "Product Update Failed..." })
+            res.json({ status: "danger", message: "Product Update Failed..." })
 
         }
     })

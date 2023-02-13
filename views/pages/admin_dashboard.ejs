@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="/table.css">
     <link rel="stylesheet" href="/toggle_btn.css">
     <link rel="stylesheet" href="/modal.css">
-    <!-- <link rel="stylesheet" href="landing.css"> -->
+    <link rel="stylesheet" href="/alertMessages.css">
 
 
 
@@ -27,27 +27,31 @@
 </head>
 
 <body>
+
+
     <!-- navbar -->
     <%- include('../partials/navbar'); %>
         <!-- left navigation panel -->
         <%- include('../partials/verticalTab'); %>
-            <%- include('../partials/edit_prod_modal'); %>
+            <%- include('../partials/alertMessages'); %>
+                <%- include('../partials/edit_prod_modal'); %>
 
 
 
 
-                <!-- frontend scripts -->
-                <script src="/JS/left_panel_navigation.js"></script>
-                <script src="/JS/table_prod_filter.js"></script>
-                <script src="/JS/close_modal.js"></script>
+                    <!-- frontend scripts -->
+                    <script src="/JS/alertMessage.js"></script>
+                    <script src="/JS/left_panel_navigation.js"></script>
+                    <script src="/JS/table_prod_filter.js"></script>
+                    <script src="/JS/close_modal.js"></script>
 
 
-                <!-- fetch api scripts -->
-                <script src="/fetch/edit_prod.js"></script>
-                <script src="/fetch/fetch_all_prod.js"></script>
-                <script src="/fetch/toggle_inStock.js"></script>
-                <script src="/fetch/delet_prod.js"></script>
-                <script src="/fetch/edit_prod_modal.js"></script>
+                    <!-- fetch api scripts -->
+                    <script src="/fetch/edit_prod.js"></script>
+                    <script src="/fetch/fetch_all_prod.js"></script>
+                    <script src="/fetch/toggle_inStock.js"></script>
+                    <script src="/fetch/delet_prod.js"></script>
+                    <script src="/fetch/edit_prod_modal.js"></script>
 
 
 </body>
