@@ -14,6 +14,8 @@ const loginRoute = require('./routes/login');
 const logoutRoute = require('./routes/logout');
 
 const verify = require('./verify');
+const connection = require('./connection');
+
 
 
 const app = express();
@@ -46,8 +48,18 @@ app.set('view engine', 'ejs')
 
 app.get('/', verify, function (req, res) {
     const role = req.cookies.role;
+
     if (role === "admin") {
-        res.render('pages/admin_dashboard')
+        let query = 'select COUNT(distinct cat.category_id) as cat_count,COUNT(distinct prod.product_id) as prod_count from prod_category as cat, products as prod'
+
+        connection.query(query, (err, results, fields) => {
+            if (!err) {
+                res.render("pages/admin_dashboard", { prod_count: results[0].prod_count, categ_count: results[0].cat_countFF });
+            } else {
+                console.log(err)
+                return res.status(500).json(err);
+            }
+        })
     }
     else if (role === "user") {
         res.render('pages/about')
