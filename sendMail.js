@@ -19,10 +19,10 @@ const refreshToken = '1//04rgeR_lXlQGfCgYIARAAGAQSNwF-L9IrF9CgfpFsKw-prWqlkqB8nH
 
 
 
-const sendMail = async (email, jwtToken, _id) => {
+const sendMail = async (email, subject, html) => {
     try {
         console.log(email)
-        console.log(jwtToken)
+        // console.log(jwtToken)
         // const accessToken = await oAuth2Client.getAccessToken();
 
         const transport = nodemailer.createTransport({
@@ -35,18 +35,12 @@ const sendMail = async (email, jwtToken, _id) => {
             }
         })
 
-        const verificationLink = `http://localhost:4200/verifyemail?token=${jwtToken}&id=${_id}`
+        // const verificationLink = `http://localhost:4200/verifyemail?token=${jwtToken}&id=${_id}`
         const mailOptions = {
             from: process.env.EMAIL,
             to: email,
-            subject: 'Forgot password',
-            html: ` 
-                    <h1>Thanks for registration.</h1>
-                    <p>Click below on the unique link to verify your account</p>
-                    <a href=${verificationLink}>Verify Account</a>
-                `
-
-
+            subject: subject,
+            html: html
         }
 
         const result = await transport.sendMail(mailOptions);

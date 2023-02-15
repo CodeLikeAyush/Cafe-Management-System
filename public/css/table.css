@@ -3,16 +3,28 @@
             box-sizing: border-box;
         }
 
+
+
+        /* -------------------------------- */
         #myInput {
             /* background-image: url('/css/searchicon.png'); */
-            background-position: 10px 10px;
+            background-position: 10px 12px;
             background-repeat: no-repeat;
             width: 100%;
             font-size: 16px;
             padding: 12px 20px 12px 40px;
             border: 1px solid #ddd;
+            background-color: rgba(143, 176, 143, 0.365);
             margin-bottom: 12px;
         }
+
+        #myInput:focus {
+            border: none;
+            outline: none;
+            border-bottom: 4px solid green;
+        }
+
+        /* -------------------------------- */
 
         #myTable {
             border-collapse: collapse;

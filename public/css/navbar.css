@@ -10,7 +10,7 @@ body {
 
 .navbar {
     width: 100%;
-    background-color: #000000;
+    background-color: green;
     overflow: auto;
     height: 82px;
     display: flex;

@@ -12,6 +12,7 @@ const userRoute = require('./routes/user');
 const adminRoute = require('./routes/admin');
 const loginRoute = require('./routes/login');
 const logoutRoute = require('./routes/logout');
+const signupRoute = require('./routes/signup');
 
 const verify = require('./verify');
 const connection = require('./connection');
@@ -31,6 +32,7 @@ app.use(cookieParser()); // for parsing cookies
 
 
 
+app.use('/signup', signupRoute);
 app.use('/login', loginRoute);
 app.use('/logout', logoutRoute);
 app.use('/user', userRoute);

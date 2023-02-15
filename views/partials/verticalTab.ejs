@@ -78,7 +78,16 @@
         <div
             style="border: 1px solid #ddd;padding: 12px;font-size: 18px;display: block;height: 60px;margin-bottom: 10px;">
             <h2 style="float: left;font-weight: bold;color: green;">Create Order</h2>
+            <button onclick=""
+                style="float: right;font-weight: bold;margin-right: 80px;width: auto;padding: 10px 18px;background-color: green;color: white; border: none;cursor: pointer;">Place
+                Order
+            </button>
         </div>
+        <input type="text" name="total_bill" id="total_bill" placeholder="Total Bill" disabled>
+        <%- include('../partials/create_order_window'); %>
+
+
+
     </div>
 
     <!-- View Bills++++++++++++++++++++++++++++++++++ -->

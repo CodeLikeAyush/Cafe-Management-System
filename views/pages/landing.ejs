@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" href="/landing.css">
-    <link rel="stylesheet" href="/modal.css">
+    <link rel="stylesheet" href="/css/landing.css">
+    <link rel="stylesheet" href="/css/modal.css">
 
     <title>Ayush Cafe</title>
 </head>
@@ -19,7 +19,7 @@
     <div id="landing_btn_div">
         <button onclick="document.getElementById('id01').style.display='block'">login</button>
         <button onclick="document.getElementById('id02').style.display='block'">signup</button>
-        <button onclick="document.getElementById('id03').style.display='block'">forgot password</button>
+        <button onclick="document.getElementById('id03').style.display='block'">verify email</button>
     </div>
 
     <%- include('../partials/login_modal'); %>
@@ -28,6 +28,7 @@
 
                 <!-- modal window script -->
                 <script src="/JS/close_modal.js"></script>
+                <script src="/fetch/signup.js"></script>
 
 
 </body>

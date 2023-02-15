@@ -46,23 +46,37 @@ insert into products (product_name,product_category,in_stock,product_description
 
 
 -- getting products for manage product table=======================
-SELECT products.product_id, products.product_name, prod_category.category_name,prod_category.category_id, products.product_description, products.price, products.in_stock
+-- SELECT products.product_id, products.product_name, prod_category.category_name,prod_category.category_id, products.product_description, products.price, products.in_stock
+-- FROM products
+-- INNER JOIN prod_category ON products.product_category = prod_category.category_id;
+SELECT products.product_id, products.product_name, prod_category.categ_name,prod_category.categ_id, products.prod_desc, products.unit_price, products.in_stock
 FROM products
-INNER JOIN prod_category ON products.product_category = prod_category.category_id;
+INNER JOIN prod_category ON products.prod_categ_id = prod_category.categ_id;
 
 
 
-update products
-set in_stock = false
-where product_id = 3;
+
+-- update products
+-- set in_stock = false
+-- where product_id = 3;
 
 
 -- Deleting product from manage product:==================================
-delete from products where product_id = 5;
+-- delete from products where product_id = 5;
+delete from products where prod_id = 5;
 
 -- Updating/edit product++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- update products set product_name = "masala dosa",product_description = "aaaa",price = 100,product_category = (select category_id from prod_category where category_name = "breakfast") where product_id = 54;
+--  update products set product_name = "masala dosa",product_description = "aaaa",price = 100,product_category = (select category_id from prod_category where category_name = "breakfast") where product_id = 54;
+ update products set prod_name = "masala dosa",prod_desc = "Best Masala Dosa",unit_price = 100,prod_categ_id = (select categ_id from prod_category where categ_name = "breakfast") where prod_id = 1;
 
 -- adding product++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-insert into products (product_name,product_category,in_stock,product_description,price) VALUES ("BANANA",(select category_id from prod_category where category_name = "FRUIT"),true,"BEST BANANA",50);
+-- insert into products (product_name,product_category,in_stock,product_description,price) VALUES ("BANANA",(select category_id from prod_category where category_name = "FRUIT"),true,"BEST BANANA",50);
+insert into products(
+      prod_name,
+      prod_categ_id,
+      in_stock,
+      prod_desc,
+      unit_price
+   )
+values("Mazza", 1, true, "Mazza: 500 ml", 45);

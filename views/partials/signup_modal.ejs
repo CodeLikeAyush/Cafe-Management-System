@@ -1,20 +1,18 @@
 <div id="id02" class="modal">
-    <span onclick="document.getElementById('id02').style.display='none'" class="close"
-        title="Close Modal">&times;</span>
-    <form class="modal-content animate" action="/user/signup", method="post">
+    <!-- <span onclick="document.getElementById('id02').style.display='none'" class="close"
+        title="Close Modal">&times;</span> -->
+    <form id="signup_form" class="modal-content animate">
+        <h1>Sign Up</h1>
+        <p>Please fill in this form to create an account.</p>
+        <hr>
         <div class="container">
-            <h1>Sign Up</h1>
-            <p>Please fill in this form to create an account.</p>
-            <hr>
 
             <label for="name"><b>Name</b></label>
             <input type="text" placeholder="Enter Name" name="name" id="usr_name" required>
 
-            <label for="contactNumber"><b>Mobile Number</b></label>
-            <input type="text" placeholder="Enter Mobile Number" name="contactNumber" id="user_mob" required>
-
             <label for="email"><b>Email</b></label>
-            <input type="text" placeholder="Enter Email" name="email" required>
+            <input type="email" placeholder="Enter Email" name="email" required>
+
 
             <label for="password"><b>Password</b></label>
             <input type="password" placeholder="Enter Password" name="password" required>
@@ -22,16 +20,68 @@
             <label for="password-repeat"><b>Repeat Password</b></label>
             <input type="password" placeholder="Repeat Password" name="password-repeat" required>
 
-            <label>
+            <!-- <label>
                 <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
-            </label>
+            </label> -->
 
             <!-- <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p> -->
 
             <div class="clearfix">
                 <button type="button" onclick="document.getElementById('id02').style.display='none'"
                     class="cancelbtn">Cancel</button>
-                <button type="submit" class="signupbtn">Sign Up</button>
+                <button type="submit" class="signupbtn">Get OTP</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="id05" class="modal">
+    <!-- <span onclick="document.getElementById('id02').style.display='none'" class="close" -->
+    <!-- title="Close Modal">&times;</span> -->
+    <form id="add_prod_form" class="modal-content animate" action="#">
+        <h1 style="margin:10px">Add Product</h1>
+        <div class="container">
+
+            <div id="edit_modal_prod_info" style="display: none;">
+                <span></span>
+            </div>
+
+            <label for="name"><b>Product Name</b></label>
+            <input type="text" placeholder="Enter Name" name="name" id="prod_name" required>
+
+            <div id="dropdown">
+                <label for="category"><b>Category</b></label>
+                <input list="categ_list" id="category" name="category" required placeholder="Pick Category"
+                    style="height: 40px;padding: 19px;width: 100%;border: 1px solid #0000004a;margin-left: 1px;margin-top: 5px;margin-bottom: 10px;">
+
+                <datalist id="categ_list">
+                    <!-- here all the category options will be injected through javascript -->
+                </datalist>
+            </div>
+
+            <label for="description"><b>Description</b></label>
+            <input type="text" id="desc" placeholder="Enter Description" name="description">
+
+            <label for="price"><b>Price</b></label>
+            <input type="number" id="price" placeholder="Enter Price" name="price" required>
+
+
+            <div class="clearfix">
+                <button type="button" onclick="document.getElementById('id05').style.display='none'"
+                    class="cancelbtn">Cancel</button>
+                <button type="submit" class="signupbtn"
+                    style="height: 36px;width:75px;background-color: green;color: white;border: none;cursor: pointer;">Add</button>
             </div>
         </div>
     </form>

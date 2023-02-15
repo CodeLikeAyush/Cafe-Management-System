@@ -15,9 +15,12 @@ var upload = multer();
 const route = express.Router();
 // +++++++++++++++++++++++++++++++++++Dashboard++++++++++++++++++++++++++++++++++++++++++++++++
 route.get('/dashboard', verify, async (req, res) => {
-    let query = 'select COUNT(distinct cat.category_id) as cat_count,COUNT(distinct prod.product_id) as prod_count from prod_category as cat, products as prod'
+    // let query = 'select COUNT(distinct cat.category_id) as cat_count,COUNT(distinct prod.product_id) as prod_count from prod_category as cat, products as prod'
+    let query = 'select COUNT(distinct cat.categ_id) as cat_count,COUNT(distinct prod.prod_id) as prod_count from prod_category as cat, products as prod'
+
 
     connection.query(query, (err, results, fields) => {
+        // console.log(results)
         if (!err) {
             res.render("pages/admin_dashboard", { prod_count: results[0].prod_count, categ_count: results[0].cat_count });
         } else {
@@ -27,24 +30,26 @@ route.get('/dashboard', verify, async (req, res) => {
     })
 })
 
-// +++++++++++++++++++++++++++++++++++++++++++/dashboard/manage_product++++++++++++++++++++++++++++++
-route.get('/dashboard', verify, async (req, res) => {
-    let query = 'select COUNT(distinct cat.category_id) as cat_count,COUNT(distinct prod.product_id) as prod_count from prod_category as cat, products as prod'
+// // +++++++++++++++++++++++++++++++++++++++++++/dashboard/manage_product++++++++++++++++++++++++++++++
+// route.get('/dashboard', verify, async (req, res) => {
+//     // let query = 'select COUNT(distinct cat.category_id) as cat_count,COUNT(distinct prod.product_id) as prod_count from prod_category as cat, products as prod'
+//     let query = 'select COUNT(distinct cat.category_id) as cat_count,COUNT(distinct prod.product_id) as prod_count from prod_category as cat, products as prod'
 
-    connection.query(query, (err, results, fields) => {
-        if (!err) {
-            res.render("pages/admin_dashboard", { prod_count: results[0].prod_count, categ_count: results[0].cat_count });
-        } else {
-            console.log(err)
-            return res.status(500).json(err);
-        }
-    })
-})
+//     connection.query(query, (err, results, fields) => {
+//         if (!err) {
+//             res.render("pages/admin_dashboard", { prod_count: results[0].prod_count, categ_count: results[0].cat_count });
+//         } else {
+//             console.log(err)
+//             return res.status(500).json(err);
+//         }
+//     })
+// })
 
 // +++++++++++++++++++++++++++++++++++++++++++/dashboard/manage_product++++++++++++++++++++++++++++++
 route.get('/dashboard/manage_product', async (req, res) => {
     // let query = 'select * from products'
-    let query = 'SELECT products.product_id, products.product_name, prod_category.category_name, prod_category.category_id, prod_category.category_id, products.product_description, products.price, products.in_stock FROM products INNER JOIN prod_category ON products.product_category = prod_category.category_id'
+    // let query = 'SELECT products.product_id, products.product_name, prod_category.category_name, prod_category.category_id, prod_category.category_id, products.product_description, products.price, products.in_stock FROM products INNER JOIN prod_category ON products.product_category = prod_category.category_id'
+    let query = 'SELECT products.prod_id, products.prod_name, prod_category.categ_name, prod_category.categ_id, products.prod_desc, products.unit_price, products.in_stock FROM products INNER JOIN prod_category ON products.prod_categ_id = prod_category.categ_id'
 
     connection.query(query, (err, results, fields) => {
         // console.log(results)
@@ -62,7 +67,7 @@ route.get('/dashboard/manage_product', async (req, res) => {
 route.patch('/dashboard/manage_product/toggleStock', verify, async (req, res) => {
     // console.log(req.body)
     // const 
-    let query = 'update products set `in_stock` = ? where `product_id` = ?;'
+    let query = 'update products set `in_stock` = ? where prod_id = ?;'
 
     connection.query(query, [req.body.inStock, req.body.id], (err, results, fields) => {
         if (!err) {
@@ -89,7 +94,7 @@ route.patch('/dashboard/manage_product/toggleStock', verify, async (req, res) =>
 //+++++++++++++++++++++++++++++++++++++delete product+++++++++++++++++++++++++++++++++++++++++++++
 route.delete('/dashboard/manage_product/delete_product', verify, async (req, res) => {
     console.log(req.body)
-    let query = 'delete from products where `product_id` = ?;'
+    let query = 'delete from products where prod_id = ?;'
 
     connection.query(query, [req.body.prod_id], (err, results, fields) => {
         if (!err) {
@@ -114,9 +119,10 @@ route.post('/dashboard/manage_product/add_prod', upload.fields([]), async (req, 
     const prod_desc = (req.body.description).toLocaleUpperCase();
     const prod_price = req.body.price;
 
-    let query = 'insert into products (`product_name`,`product_category`,in_stock,`product_description`,`price`) VALUES (?,(select category_id from prod_category where category_name = ?),true,?,?)'
+    let query = 'insert into products (prod_name,prod_categ_id,in_stock,prod_desc,unit_price) VALUES (?,(select categ_id from prod_category where categ_name = ?),true,?,?)'
 
     connection.query(query, [prod_name, prod_categ, prod_desc, prod_price], (err, results, fields) => {
+        console.log(results);
         if (!err) {
             console.log(results)
             res.json({ status: "success", message: "Product added...", prod_id: results.insertId })
@@ -135,10 +141,10 @@ route.post('/dashboard/manage_product/add_prod', upload.fields([]), async (req, 
 
 
 route.get('/dashboard/manage_product/edit_prod', async (req, res) => {
-    let query = 'select prod_category.category_id,prod_category.category_name from prod_category'
+    let query = 'select prod_category.categ_id,prod_category.categ_name from prod_category'
 
     connection.query(query, (err, results, fields) => {
-        // console.log(results)
+        console.log(results)
         if (!err) {
             res.json(results)
             // res.json({ status: "success", message: "Product Stock Updated..." })
@@ -159,7 +165,7 @@ route.post('/dashboard/manage_product/edit_prod', upload.fields([]), async (req,
     const prod_desc = (req.body.description).toLocaleUpperCase();
     const prod_price = req.body.price;
 
-    let query = 'update products set `product_name` = ?,`product_description` = ?,`price` = ?,`product_category` = (select category_id from prod_category where `category_name` = ?) where product_id = ?'
+    let query = 'update products set prod_name = ?,prod_desc = ?,unit_price = ?,prod_categ_id = (select categ_id from prod_category where categ_name = ?) where prod_id = ?'
 
     connection.query(query, [prod_name, prod_desc, prod_price, prod_categ, prod_id], (err, results, fields) => {
         if (!err) {
@@ -284,62 +290,62 @@ route.post('/dashboard/manage_product/edit_prod', upload.fields([]), async (req,
 
 
 
-//++++++++++++++++++++++++++++++++++++++admin signup+++++++++++++++++++++++++++++++++++++++++++++++
-route.post('/signup', async (req, res) => {
-    const newSecretKey = secretKey();
-    try {
-        // console.log(mail)
-        const { name, contactNumber, email, password } = req.body;
+// //++++++++++++++++++++++++++++++++++++++admin signup+++++++++++++++++++++++++++++++++++++++++++++++
+// route.post('/signup', async (req, res) => {
+//     const newSecretKey = secretKey();
+//     try {
+//         // console.log(mail)
+//         const { name, contactNumber, email, password } = req.body;
 
-        let query = 'select email,password,role,status from users where `email` = ?'
-        // ---------------------------------------------
-        connection.query(query, [email], (err, results, fields) => {
-            if (!err) {
-                console.log(results)
+//         let query = 'select email,password,role,status from users where `email` = ?'
+//         // ---------------------------------------------
+//         connection.query(query, [email], (err, results, fields) => {
+//             if (!err) {
+//                 console.log(results)
 
-                if (results.length <= 0) {// user doesn't exists:
-                    console.log("user doesn't exists so registering")
+//                 if (results.length <= 0) {// user doesn't exists:
+//                     console.log("user doesn't exists so registering")
 
-                    query = 'insert into users (`name`,`contactNumber`,`email`,`password`,`status`,`role`) VALUES(?,?,?,?,"true","user")'
-                    connection.query(query, [name, contactNumber, email, password], async (err, results, fields) => {
-                        if (!err) {
-                            // let jwtToken;
-                            // const userData = { 'email': email, name: name };
-                            // jwtToken = await jwt.sign(userData, secretKey, {
-                            //     expiresIn: '43200s' // token will expire in 12 hours
-                            // });
-
-
-                            // mail(email, jwtToken, result._id);
-                            return res.status(200).json({ message: "Registrations Success" })
-                        }
-                        else {
-                            console.log("sqlMessage:" + err["sqlMessage"])
-                            return res.status(400).json(err["sqlMessage"]);
-                        }
-                    })
+//                     query = 'insert into users (`name`,`contactNumber`,`email`,`password`,`status`,`role`) VALUES(?,?,?,?,"true","user")'
+//                     connection.query(query, [name, contactNumber, email, password], async (err, results, fields) => {
+//                         if (!err) {
+//                             // let jwtToken;
+//                             // const userData = { 'email': email, name: name };
+//                             // jwtToken = await jwt.sign(userData, secretKey, {
+//                             //     expiresIn: '43200s' // token will expire in 12 hours
+//                             // });
 
 
-                }
-                else {// user already exists:
-                    console.log("user already exists")
-                    return res.status(409).json({ message: "already exists", user: results[0] });
-                }
-
-            }
-            else {
-                console.log("sqlMessage:" + err["sqlMessage"])
-                return res.status(500).json(err["sqlMessage"]);
-            }
-
-        })
+//                             // mail(email, jwtToken, result._id);
+//                             return res.status(200).json({ message: "Registrations Success" })
+//                         }
+//                         else {
+//                             console.log("sqlMessage:" + err["sqlMessage"])
+//                             return res.status(400).json(err["sqlMessage"]);
+//                         }
+//                     })
 
 
+//                 }
+//                 else {// user already exists:
+//                     console.log("user already exists")
+//                     return res.status(409).json({ message: "already exists", user: results[0] });
+//                 }
 
-    } catch (err) {
-        res.status(400).send("Error at try-catch of /admin/register:" + err);
-    }
-})
+//             }
+//             else {
+//                 console.log("sqlMessage:" + err["sqlMessage"])
+//                 return res.status(500).json(err["sqlMessage"]);
+//             }
+
+//         })
+
+
+
+//     } catch (err) {
+//         res.status(400).send("Error at try-catch of /admin/register:" + err);
+//     }
+// })
 
 
 

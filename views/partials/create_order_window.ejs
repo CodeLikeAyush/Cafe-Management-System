@@ -1,0 +1,50 @@
+<div>
+    <form action="#">
+
+        <!-- Customer details -->
+        <div id="cust_details" style="border: 1px solid green;padding: 30px;margin: 20px;">
+            <h3 style="color:green;">Customer Details</h3><br>
+            <hr><br>
+            <label for="name"><b>Name</b></label>
+            <input type="text" name="name" id="cust_name" placeholder="Customer Name" required>
+
+            <label for="email"><b>Email</b></label>
+            <input type="email" name="name" id="cust_email" placeholder="Customer Email">
+
+            <label for="mob_no"><b>Mobile Number</b></label>
+            <input type="text" name="mob_no" id="cust_mob" placeholder="Customer Mobile Number" required>
+        </div>
+
+        <!-- Product details -->
+        <div id="choose_prod" style="border: 1px solid green;padding: 30px;margin: 20px;">
+            <h3 style="color:green;">Choose Product</h3><br>
+            <hr><br>
+            <label for="myBrowser"><b>Choose Product</b></label>
+            <input list="browsers" id="myBrowser" name="myBrowser" placeholder="Search or Choose" required />
+            <datalist id="browsers">
+                <option value="Chrome"></option>
+                <option value="Firefox"></option>
+                <option value="Internet Explorer"></option>
+                <option value="Opera"></option>
+                <option value="Safari"></option>
+                <option value="Microsoft Edge"></option>
+            </datalist>
+
+            <label for="quantity"><b>Quantity</b></label>
+            <input type="number" name="quantity" id="item_quant" required>
+
+            <label for="price"><b>Unit Price</b></label>
+            <input type="number" name="price" id="item_price" disabled>
+
+            <label for="total"><b>Total</b></label>
+            <input type="number" name="total" id="total" disabled>
+
+
+        </div>
+    </form>
+</div>
+
+<div style="min-height: 500px;">
+    <%- include('../partials/create_order_table'); %>
+
+</div>

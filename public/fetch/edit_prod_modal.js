@@ -32,7 +32,7 @@ async function editProduct(event) {
         // console.log(data)
         let str1 = "";
         data.forEach(element => {
-            let str = `<option value="${element.category_name}" class=${element.category_id}>`
+            let str = `<option value="${element.categ_name}" class=${element.categ_id}>`
             str1 += str
         });
         document.getElementById('categ_list').innerHTML = str1
