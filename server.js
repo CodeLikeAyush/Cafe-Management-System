@@ -49,24 +49,24 @@ app.use(cors());
 app.set('view engine', 'ejs')
 
 app.get('/', verify, function (req, res) {
-    const role = req.cookies.role;
+    // const role = req.cookies.role;
+console.log("hihihihih")
+    // if (role === "admin") {
+    let query = 'select COUNT(distinct cat.categ_id) as cat_count,COUNT(distinct prod.prod_id) as prod_count from prod_category as cat, products as prod'
 
-    if (role === "admin") {
-        let query = 'select COUNT(distinct cat.category_id) as cat_count,COUNT(distinct prod.product_id) as prod_count from prod_category as cat, products as prod'
+    connection.query(query, (err, results, fields) => {
+        if (!err) {
+            res.render("pages/admin_dashboard", { prod_count: results[0].prod_count, categ_count: results[0].cat_countFF });
+        } else {
+            console.log(err)
+            return res.status(500).json(err);
+        }
+    })
+    // }
+    // else if (role === "user") {
+    //     res.render('pages/about')
 
-        connection.query(query, (err, results, fields) => {
-            if (!err) {
-                res.render("pages/admin_dashboard", { prod_count: results[0].prod_count, categ_count: results[0].cat_countFF });
-            } else {
-                console.log(err)
-                return res.status(500).json(err);
-            }
-        })
-    }
-    else if (role === "user") {
-        res.render('pages/about')
-
-    }
+    // }
 
 })
 app.listen(port, () => console.log(`Server is online at: http://localhost:${port}`));

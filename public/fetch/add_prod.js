@@ -6,7 +6,7 @@ add_prod_form.addEventListener('submit', async (event) => {
     let formdata = new FormData(add_prod_form);
     // const prod_id = document.getElementById("edit_modal_prod_info").children[0].innerText;
     // formdata.append("id", prod_id);
-    console.log([...(formdata.entries())])
+    // console.log([...(formdata.entries())])
 
     const prod_name = formdata.get('name').toUpperCase();
     const prod_categ = formdata.get('category').toUpperCase();

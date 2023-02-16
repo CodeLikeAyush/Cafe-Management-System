@@ -1,7 +1,7 @@
 <div>
-    <form action="#">
+    <!-- Customer details -->
+    <form action="#" id="cust_detail_form">
 
-        <!-- Customer details -->
         <div id="cust_details" style="border: 1px solid green;padding: 30px;margin: 20px;">
             <h3 style="color:green;">Customer Details</h3><br>
             <hr><br>
@@ -14,32 +14,37 @@
             <label for="mob_no"><b>Mobile Number</b></label>
             <input type="text" name="mob_no" id="cust_mob" placeholder="Customer Mobile Number" required>
         </div>
+    </form>
 
-        <!-- Product details -->
+
+    <!-- Product details -->
+    <form action="#" id="prod_detail_form">
+
         <div id="choose_prod" style="border: 1px solid green;padding: 30px;margin: 20px;">
             <h3 style="color:green;">Choose Product</h3><br>
             <hr><br>
-            <label for="myBrowser"><b>Choose Product</b></label>
-            <input list="browsers" id="myBrowser" name="myBrowser" placeholder="Search or Choose" required />
-            <datalist id="browsers">
-                <option value="Chrome"></option>
-                <option value="Firefox"></option>
-                <option value="Internet Explorer"></option>
-                <option value="Opera"></option>
-                <option value="Safari"></option>
-                <option value="Microsoft Edge"></option>
+            <label for="item"><b>Choose Product</b></label>
+            <input list="order_prod_list" id="item" name="item" placeholder="Search or Choose"
+                onchange="populate_price(event)" required />
+            <datalist id="order_prod_list">
+                <!-- here these kind of options will be injected by javascript: -->
+                <!-- <option value="Microsoft Edge"></option> -->
             </datalist>
 
             <label for="quantity"><b>Quantity</b></label>
-            <input type="number" name="quantity" id="item_quant" required>
+            <input type="number" name="quantity" id="item_quant" min="1" max="10" onchange="update_price(event)"
+                disabled required>
 
-            <label for="price"><b>Unit Price</b></label>
-            <input type="number" name="price" id="item_price" disabled>
+            <label for="unit_price"><b>Unit Price</b></label>
+            <input type="number" name="unit_price" id="item_price" disabled>
 
-            <label for="total"><b>Total</b></label>
-            <input type="number" name="total" id="total" disabled>
+            <label for="total_price"><b>Total</b></label>
+            <input type="number" name="total" id="total_price" disabled>
 
-
+            <button
+                style="float: right;font-weight: bold;margin-right: 80px;width: auto;padding: 10px 18px;background-color: green;color: white; border: none;cursor: pointer;">Add
+                Item
+            </button><br><br>
         </div>
     </form>
 </div>

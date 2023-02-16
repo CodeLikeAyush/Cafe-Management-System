@@ -184,6 +184,26 @@ route.post('/dashboard/manage_product/edit_prod', upload.fields([]), async (req,
 
 })
 
+// ++++++++++++++++++++++++++++++CREATE ORDER++++++++++++++++++++++++++++++++++++++++++++++++++++
+route.get('/dashboard/create_order', async (req, res) => {
+
+    let query = 'select prod_id, prod_name, unit_price from products where in_stock = true'
+
+    connection.query(query, (err, results, fields) => {
+        console.log(results)
+        if (!err) {
+            res.json(results)
+            // res.json({ status: "success", message: "Product Stock Updated..." })
+
+        }
+        else {
+            console.log(err);
+            res.json({ status: "error", message: "Unable to fetch products..." })
+
+        }
+    })
+})
+
 
 
 

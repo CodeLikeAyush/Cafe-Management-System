@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS user_auth(
 );
 -- INSERT data into user_auth:
 insert into user_auth(user_id, user_passw, authorized, verified)
-values (1, "123", true, true);
+values (1, "12345", true, true);
 -- CREATE customer table:
 create table if not exists customer(
    cust_id int not null auto_increment,

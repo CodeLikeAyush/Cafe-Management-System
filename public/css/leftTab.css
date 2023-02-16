@@ -32,7 +32,8 @@ body {
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-    background-color: rgba(143, 176, 143, 0.365);;
+    background-color: rgba(143, 176, 143, 0.365);
+    ;
 }
 
 /* Create an active/current "tab button" class */
@@ -49,4 +50,5 @@ body {
     width: 70%;
     border-left: none;
     height: 100vh;
+    overflow: scroll;
 }

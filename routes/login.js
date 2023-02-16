@@ -20,11 +20,11 @@ route.post('/', (req, res) => {
     // query = 'select email, password,role,status from users where `email` = ?'
     // query = 'select (user.email) as email, (userAuth.user_passw) as pass,(userAuth.athorized) as authorized from users as user,user_auth as userAuth where `email` = ?'
     let query = ' select usr.user_email,auth.user_passw,auth.authorized from users as usr,user_auth as auth where usr.user_email = ?'
-
+    console.log(user)
     connection.query(query, [user.email], (err, results, fields) => {
         // console.log(results)
         if (!err) {
-            if (results.length <= 0 || results[0].user_passw != user.password) {
+            if (results[0].length <= 0 || results[0].user_passw != user.password) {
                 res.json({ message: "Incorrect username or password" })
             }
             else if (results[0].authorized == 'false') {
@@ -36,7 +36,7 @@ route.post('/', (req, res) => {
 
                 // res.json({ token: accessToken });
                 res.cookie("token", accessToken, { maxAge: 3600000 })
-                res.cookie("role", results[0].role, { maxAge: 3600000 })
+                // res.cookie("role", results[0].role, { maxAge: 3600000 })
 
                 // if (results[0].role == 'admin') {
                 res.redirect("/admin/dashboard");
