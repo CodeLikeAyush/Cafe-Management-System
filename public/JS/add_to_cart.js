@@ -3,6 +3,7 @@ fo.addEventListener('submit', (event) => {
     event.preventDefault();
 
     data = new FormData(fo);
+    // console.log([...(data.entries())])
 
     let item = data.get('item');
     let quant = data.get('quantity');
@@ -37,7 +38,6 @@ fo.addEventListener('submit', (event) => {
     window.sessionStorage.setItem('order_items', JSON.stringify(order_info));
 
     // console.log(order_info)
-
-    // console.log([...(data.entries())])
+    populateOrderTable();
 
 })

@@ -41,7 +41,7 @@ async function fetchProducts(event) {
 
         });
         // injecting (head and data) rows into the table body:
-        document.getElementById("myTable").innerHTML = str1;
+        document.getElementById("productTable").innerHTML = str1;
 
     } catch (err) {
         console.log(err)

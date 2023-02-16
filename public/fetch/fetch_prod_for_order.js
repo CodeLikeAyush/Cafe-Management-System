@@ -7,8 +7,8 @@ async function fetchProdForOrder(event) {
         var products = await res.json();
         // console.log(products)
 
-        // console.log(data)
         window.sessionStorage.setItem('order_page_prod_info', JSON.stringify(products));
+        
         let str1 = "";
         products.forEach(product => {
             let str = `<option value="${product.prod_name}" id=${product.prod_id}>`

@@ -40,10 +40,10 @@ add_prod_form.addEventListener('submit', async (event) => {
            </div>
        </td>
    </tr>`
-        let prevRows = document.getElementById('myTable').children[0].innerHTML;
+        let prevRows = document.getElementById('productTable').children[0].innerHTML;
 
         prevRows += newRow;
-        document.getElementById("myTable").innerHTML = prevRows;
+        document.getElementById("productTable").innerHTML = prevRows;
 
         document.getElementById('id05').style.display = 'none';
 

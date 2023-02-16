@@ -26,24 +26,30 @@
 
         /* -------------------------------- */
 
-        #myTable {
+        #productTable,
+        #orderTable {
             border-collapse: collapse;
             width: 100%;
             border: 1px solid #ddd;
             font-size: 18px;
         }
 
-        #myTable th,
-        #myTable td {
+        #productTable th,
+        #orderTable th,
+        #productTable td,
+        #orderTable td {
             text-align: left;
             padding: 12px;
         }
 
-        #myTable tr {
+        #productTable tr,
+        #orderTable tr {
             border-bottom: 1px solid #ddd;
         }
 
-        #myTable tr.header,
-        #myTable tr:hover {
+        #orderTable tr.header,
+        #productTable tr:hover,
+        #orderTable tr.header,
+        #productTable tr:hover {
             background-color: #f1f1f1;
         }
