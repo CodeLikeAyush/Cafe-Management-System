@@ -1,6 +1,10 @@
-function populateOrderTable() {
+function populateOrderTable(event) {
 
     const products = JSON.parse(sessionStorage.getItem('order_items'));
+
+    if (products == null && event.target.classList.contains('tablinks')) {
+        return;
+    }
 
     function getPrice(item) {
         const storedData = JSON.parse(sessionStorage.getItem('order_page_prod_info'));

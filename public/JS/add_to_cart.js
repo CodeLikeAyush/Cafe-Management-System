@@ -39,5 +39,6 @@ fo.addEventListener('submit', (event) => {
 
     // console.log(order_info)
     populateOrderTable();
+    totalBill();
 
 })

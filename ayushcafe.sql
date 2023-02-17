@@ -84,26 +84,28 @@ CREATE TABLE IF NOT EXISTS cust_order(
    ord_id INT NOT NULL auto_increment,
    ord_date_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
    cust_id INT NOT NULL,
+   bill_amount int not null,
    ord_bill varchar(255) not null unique,
    ord_processed_by int not null,
    constraint pk_ord_id primary key (ord_id),
    CONSTRAINT fk_ordered_by_cust FOREIGN KEY (cust_id) REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- INSERT data into cust_order:
-insert into cust_order(cust_id, ord_bill, ord_processed_by)
-values (1, "C:/Users/ayush/Downloads/bill_1.pdf", 1);
+insert into cust_order(cust_id, bill_amount, ord_bill, ord_processed_by)
+values (1, 100, "C:/Users/ayush/Downloads/bill_1.pdf", 1);
 -- CREATE ord_prod_relation_table table(for many to many relation between products and cust_order):
 CREATE TABLE IF NOT EXISTS ord_prod_relation_table(
    ord_id int not NULL,
    prod_id int not NULL,
    quantity int not null,
+   unit_price int not null,
    constraint pk_ord_id_prod_id primary key(ord_id, prod_id),
    constraint fk_prod_is_in_ord FOREIGN key (ord_id) REFERENCES cust_order(ord_id) ON DELETE CASCADE ON UPDATE CASCADE,
    constraint fk_ord_has_items FOREIGN key (prod_id) REFERENCES products(prod_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- INSERT data into ord_prod_relation_table:
-insert into ord_prod_relation_table (ord_id, prod_id, quantity)
-values (1, 1, 5);
+insert into ord_prod_relation_table (ord_id, prod_id, quantity, unit_price)
+values (1, 1, 5, 100);
 -- show values from the tables:
 SELECT *
 from cust_order;

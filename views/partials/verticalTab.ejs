@@ -1,9 +1,11 @@
 <!-- left navigation buttons+++++++++++++++++++++++ -->
 <div class="tab" style="height: 100vh;position: fixed;top: 82px;left: 0px;">
     <button class="tablinks" onclick="openCity(event, 'Dashboard')" id="defaultOpen">Dashboard</button>
-    <button class="tablinks" onclick="openCity(event, 'Manage Products');fetchProducts()">Manage Products</button>
     <button class="tablinks"
-        onclick="openCity(event, 'Create Order');fetchProdForOrder(event);populateOrderTable(event)">Create
+        onclick="openCity(event, 'Manage Products');fetchProducts();populateOrderTable(event);">Manage
+        Products</button>
+    <button class="tablinks"
+        onclick="openCity(event, 'Create Order');fetchProdForOrder(event);populateOrderTable(event);totalBill(event)">Create
         Order</button>
     <button class="tablinks" onclick="openCity(event, 'View Bills')">View Bills</button>
     <button class="tablinks" onclick="openCity(event, 'Manage Users')">Manage Users</button>
@@ -38,14 +40,14 @@
                 <h1>
                     <%= prod_count%>
                 </h1><br>
-                <h3>Total Products</h3>
+                <h3>Total Product</h3>
                 <!-- <button type="button" class="card_btn">View Products</button> -->
             </div>
         </div>
         <div class="column">
             <div class="card">
                 <h1>10</h1><br>
-                <h3>Total Bills</h3>
+                <h3>Total Order</h3>
                 <!-- <button type="button" class="card_btn">View Bills</button> -->
             </div>
         </div>
@@ -85,7 +87,7 @@
                 Order
             </button>
         </div>
-        <input type="text" name="total_bill" id="total_bill" placeholder="Total Bill" disabled>
+        <input type="text" name="total_bill" id="total_bill" placeholder="Total Bill" value="Total amount: 0" disabled>
         <%- include('../partials/create_order_window'); %>
 
 
