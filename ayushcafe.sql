@@ -39,7 +39,7 @@ values (1, "12345", true, true);
 create table if not exists customer(
    cust_id int not null auto_increment,
    cust_name varchar(255) not null,
-   email varchar(255) null,
+   email varchar(255) not null,
    mob_no varchar(255) not null,
    constraint pk_cust_id primary key (cust_id)
 );
