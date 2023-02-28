@@ -16,13 +16,14 @@ const route = express.Router();
 // +++++++++++++++++++++++++++++++++++Dashboard++++++++++++++++++++++++++++++++++++++++++++++++
 route.get('/dashboard', verify, async (req, res) => {
     // let query = 'select COUNT(distinct cat.category_id) as cat_count,COUNT(distinct prod.product_id) as prod_count from prod_category as cat, products as prod'
-    let query = 'select COUNT(distinct cat.categ_id) as cat_count,COUNT(distinct prod.prod_id) as prod_count from prod_category as cat, products as prod'
+    let query = 'select COUNT(distinct cat.categ_id) as cat_count,COUNT(distinct prod.prod_id) as prod_count,COUNT(distinct ord.ord_id) as ord_count from prod_category as cat, products as prod, cust_order as ord'
 
 
     connection.query(query, (err, results, fields) => {
         // console.log(results)
         if (!err) {
-            res.render("pages/admin_dashboard", { prod_count: results[0].prod_count, categ_count: results[0].cat_count });
+            res.render("pages/admin_dashboard", { category_count: results[0].cat_count, product_count: results[0].prod_count, order_count: results[0].ord_count });
+            // res.json({m:32})
         } else {
             console.log(err)
             return res.status(500).json(err);

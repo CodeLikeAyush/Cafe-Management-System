@@ -13,8 +13,9 @@ CREATE table if not exists users(
    constraint pk_user_id primary key(user_id)
 );
 -- INSERT data into users:
-insert into users(user_name, user_email, mob_no)
+insert into users(user_id, user_name, user_email, mob_no)
 values (
+      1,
       "Ayush Raj",
       "ayushjnv25@gmail.com",
       "1234567890"
@@ -22,7 +23,7 @@ values (
 -- CREATE user_auth table:
 CREATE TABLE IF NOT EXISTS user_auth(
    auth_id int not NULL auto_increment,
-   -- user_id int not NULL,
+   user_id int not NULL,
    user_passw varchar(255) not null,
    email_otp VARCHAR(10) default null,
    otp_dt_time TIMESTAMP default CURRENT_TIMESTAMP on UPDATE CURRENT_TIMESTAMP,
@@ -30,7 +31,7 @@ CREATE TABLE IF NOT EXISTS user_auth(
    verified bool null,
    constraint pk_auth_id primary key(auth_id),
    -- CONSTRAINT fk_auth_id_of_user_id FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE
-   CONSTRAINT fk_auth_id_of_user_id FOREIGN KEY (auth_id) REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE
+   CONSTRAINT fk_auth_id_of_user_id FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- INSERT data into user_auth:
 insert into user_auth(user_id, user_passw, authorized, verified)
@@ -58,7 +59,23 @@ create table if not exists prod_category(
 );
 -- INSERT data into prod_category:
 insert into prod_category (categ_name)
-values("cold drink");
+values ("COLD DRINKS"),
+   ("LASSI"),
+   ("ICE-CREAMS"),
+   ("BEVERAGES"),
+   ("NOODLES"),
+   ("BURGER"),
+   ("INDIAN BREAD"),
+   ("RICE"),
+   ("SALAD"),
+   ("MILK SHAKES"),
+   ("EGG"),
+   ("ROLLS"),
+   ("SANDWICHES"),
+   ("SOUP"),
+   ("PAV SPECIAL"),
+   ("JUICES"),
+   ("BIRYANI");
 -- CREATE products table:
 create table if not exists products(
    prod_id int not null auto_increment,
@@ -88,7 +105,7 @@ CREATE TABLE IF NOT EXISTS cust_order(
    ord_bill varchar(255) not null unique,
    ord_processed_by int not null,
    constraint pk_ord_id primary key (ord_id),
-   CONSTRAINT fk_ordered_by_cust FOREIGN KEY (cust_id) REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE
+   CONSTRAINT fk_ordered_by_cust FOREIGN KEY (cust_id) REFERENCES customer(cust_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- INSERT data into cust_order:
 insert into cust_order(cust_id, bill_amount, ord_bill, ord_processed_by)
@@ -122,5 +139,5 @@ from user_auth;
 SELECT *
 from users;
 -- INSERT data into user_auth(the below values inserted has admin privilages):
-insert into user_auth(user_passw, authorized, verified)
-values ("12345", true, true);
+-- insert into user_auth(user_id, user_passw, authorized, verified)
+-- values ((select user_id from users where user_email = "ayushjnv25@gmail.com"), "12345", true, true);

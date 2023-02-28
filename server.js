@@ -50,7 +50,6 @@ app.set('view engine', 'ejs')
 
 app.get('/', verify, function (req, res) {
     // const role = req.cookies.role;
-console.log("hihihihih")
     // if (role === "admin") {
     let query = 'select COUNT(distinct cat.categ_id) as cat_count,COUNT(distinct prod.prod_id) as prod_count from prod_category as cat, products as prod'
 
