@@ -2,7 +2,7 @@
 
 async function fetchProducts(event) {
     try {
-        let res = await fetch("/admin/dashboard/manage_product");
+        let res = await fetch("/admin/manage_product");
         let products = await res.json();
         // console.log(products)
 

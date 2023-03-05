@@ -27,6 +27,7 @@
         /* -------------------------------- */
 
         #productTable,
+        #billsTable,
         #orderTable {
             border-collapse: collapse;
             width: 100%;
@@ -35,21 +36,29 @@
         }
 
         #productTable th,
+        #billsTable th,
         #orderTable th,
+        #billsTable th,
         #productTable td,
+        #billsTable td,
         #orderTable td {
             text-align: left;
             padding: 12px;
         }
 
         #productTable tr,
+        #billsTable tr,
         #orderTable tr {
             border-bottom: 1px solid #ddd;
         }
 
         #orderTable tr.header,
+        #billsTable tr.header,
         #productTable tr:hover,
+        #billsTable tr:hover,
         #orderTable tr.header,
-        #productTable tr:hover {
+        #billsTable tr.header,
+        #productTable tr:hover,
+        #billsTable tr:hover {
             background-color: #f1f1f1;
         }

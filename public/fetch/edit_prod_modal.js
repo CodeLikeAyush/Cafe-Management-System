@@ -26,7 +26,7 @@ async function editProduct(event) {
     document.getElementById('id04').style.display = 'block';
     try {
         // fetching all category names and embedding it in option for choosing category in edit product modal:
-        let res = await fetch("/admin/dashboard/manage_product/edit_prod");
+        let res = await fetch("/admin/manage_product/edit_prod");
         let data = await res.json();
 
         // console.log(data)

@@ -46,7 +46,7 @@ function populateOrderTable(event) {
                             <span>${product.item_id}</span>
                             <span>${product.item_id}</span>
                         </div>
-                        <span class="material-symbols-outlined delt_icon" title="remove item" onclick="remove_item(event)">delete</span>
+                        <span class="material-symbols-outlined delt_icon" title="remove from cart" onclick="remove_item(event)">delete</span>
                     </div>
                 </td>
             </tr>`;

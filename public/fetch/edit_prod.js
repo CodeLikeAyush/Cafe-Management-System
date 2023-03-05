@@ -16,7 +16,7 @@ edit_prod_form.addEventListener('submit', async (event) => {
     const prod_price = formdata.get('price');
     // console.log(prod_name, prod_categ, prod_desc, prod_price)
     try {
-        const rawResponse = await fetch('/admin/dashboard/manage_product/edit_prod', {
+        const rawResponse = await fetch('/admin/manage_product/edit_prod', {
             method: 'post',
             body: formdata
         });

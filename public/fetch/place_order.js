@@ -17,7 +17,7 @@ order_form.addEventListener('submit', async (event) => {
     console.log([...(formdata.entries())])
 
     try {
-        const rawResponse = await fetch('/admin/dashboard/create_order', {
+        const rawResponse = await fetch('/admin/create_order', {
             method: 'post',
             body: formdata
         })

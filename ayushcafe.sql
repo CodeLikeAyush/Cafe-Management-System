@@ -45,12 +45,12 @@ create table if not exists customer(
    constraint pk_cust_id primary key (cust_id)
 );
 -- INSERT data into customer:
-insert into customer(cust_name, email, mob_no)
-values (
-      "Anurag Upadhyay",
-      "anurag@gmail.com",
-      "7894561230"
-   );
+-- insert into customer(cust_name, email, mob_no)
+-- values (
+--       "Anurag Upadhyay",
+--       "anurag@gmail.com",
+--       "7894561230"
+--    );
 -- CREATE prod_category table:
 create table if not exists prod_category(
    categ_id int not null auto_increment,
@@ -108,8 +108,8 @@ CREATE TABLE IF NOT EXISTS cust_order(
    CONSTRAINT fk_ordered_by_cust FOREIGN KEY (cust_id) REFERENCES customer(cust_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- INSERT data into cust_order:
-insert into cust_order(cust_id, ord_processed_by)
-values (1, 1);
+-- insert into cust_order(cust_id, ord_processed_by)
+-- values (1, 1);
 -- CREATE ord_prod_relation_table table(for many to many relation between products and cust_order):
 CREATE TABLE IF NOT EXISTS ord_prod_relation_table(
    ord_id int not NULL,
@@ -121,8 +121,8 @@ CREATE TABLE IF NOT EXISTS ord_prod_relation_table(
    constraint fk_ord_has_items FOREIGN key (prod_id) REFERENCES products(prod_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 -- INSERT data into ord_prod_relation_table:
-insert into ord_prod_relation_table (ord_id, prod_id, quantity, unit_price)
-values (1, 1, 5, 100);
+-- insert into ord_prod_relation_table (ord_id, prod_id, quantity, unit_price)
+-- values (1, 1, 5, 100);
 -- show values from the tables:
 SELECT *
 from cust_order;

@@ -3,7 +3,7 @@
 
 async function fetchProdForOrder(event) {
     try {
-        let res = await fetch("/admin/dashboard/create_order");
+        let res = await fetch("/admin/create_order");
         var products = await res.json();
         // console.log(products)
 

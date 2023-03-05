@@ -39,8 +39,18 @@ route.post('/', (req, res) => {
                 // res.cookie("role", results[0].role, { maxAge: 3600000 })
 
                 // if (results[0].role == 'admin') {
-                res.redirect("/admin/dashboard");
+                res.redirect("/admin");
+                // let query = 'select COUNT(distinct cat.categ_id) as cat_count,COUNT(distinct prod.prod_id) as prod_count,COUNT(distinct ord.ord_id) as ord_count from prod_category as cat, products as prod, cust_order as ord'
+                // connection.query(query, (err, results, fields) => {
+                //     if (!err) {
+                //         res.render("pages/admin_dashboard", { prod_count: results[0].prod_count, categ_count: results[0].cat_count, ord_count: results[0].ord_count });
+                //     } else {
+                //         console.log(err)
+                //         return res.status(500).json(err);
+                //     }
+                // })
                 // res.render('pages/admin_dashboard')
+                
                 // } else if (results[0].role == 'user') {
                 // res.render('pages/about.ejs')
                 // res.redirect("/user");

@@ -51,11 +51,11 @@ app.set('view engine', 'ejs')
 app.get('/', verify, function (req, res) {
     // const role = req.cookies.role;
     // if (role === "admin") {
-    let query = 'select COUNT(distinct cat.categ_id) as cat_count,COUNT(distinct prod.prod_id) as prod_count from prod_category as cat, products as prod'
+    let query = 'select COUNT(distinct cat.categ_id) as cat_count,COUNT(distinct prod.prod_id) as prod_count,COUNT(distinct ord.ord_id) as ord_count from prod_category as cat, products as prod, cust_order as ord'
 
     connection.query(query, (err, results, fields) => {
         if (!err) {
-            res.render("pages/admin_dashboard", { prod_count: results[0].prod_count, categ_count: results[0].cat_countFF });
+            res.render("pages/admin_dashboard", { prod_count: results[0].prod_count, categ_count: results[0].cat_count,ord_count:results[0].ord_count });
         } else {
             console.log(err)
             return res.status(500).json(err);

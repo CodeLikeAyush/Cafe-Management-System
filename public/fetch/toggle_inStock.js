@@ -7,7 +7,7 @@ async function toggleStock(event) {
     // console.log(id)
     // console.log(inStock)
     try {
-        const rawResponse = await fetch('/admin/dashboard/manage_product/toggleStock', {
+        const rawResponse = await fetch('/admin/manage_product/toggleStock', {
             method: 'PATCH',
             headers: {
                 'Accept': 'application/json',

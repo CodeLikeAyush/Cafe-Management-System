@@ -18,7 +18,8 @@ var upload = multer();
 
 const route = express.Router();
 // +++++++++++++++++++++++++++++++++++Dashboard++++++++++++++++++++++++++++++++++++++++++++++++
-route.get('/dashboard', verify, async (req, res) => {
+route.get('/', verify, async (req, res) => {
+    console.log("hhhhhhhhhhherererer")
     // let query = 'select COUNT(distinct cat.category_id) as cat_count,COUNT(distinct prod.product_id) as prod_count from prod_category as cat, products as prod'
     let query = 'select COUNT(distinct cat.categ_id) as cat_count,COUNT(distinct prod.prod_id) as prod_count,COUNT(distinct ord.ord_id) as ord_count from prod_category as cat, products as prod, cust_order as ord'
 
@@ -26,17 +27,16 @@ route.get('/dashboard', verify, async (req, res) => {
     connection.query(query, (err, results, fields) => {
         // console.log(results)
         if (!err) {
-            res.render("pages/admin_dashboard", { category_count: results[0].cat_count, product_count: results[0].prod_count, order_count: results[0].ord_count });
+            res.render("pages/admin_dashboard", { categ_count: results[0].cat_count, prod_count: results[0].prod_count, ord_count: results[0].ord_count });
             // res.json({m:32})
         } else {
-            console.log(err)
             return res.status(500).json(err);
         }
     })
 })
 
 // // +++++++++++++++++++++++++++++++++++++++++++/dashboard/manage_product++++++++++++++++++++++++++++++
-// route.get('/dashboard', verify, async (req, res) => {
+// route.get('', verify, async (req, res) => {
 //     // let query = 'select COUNT(distinct cat.category_id) as cat_count,COUNT(distinct prod.product_id) as prod_count from prod_category as cat, products as prod'
 //     let query = 'select COUNT(distinct cat.category_id) as cat_count,COUNT(distinct prod.product_id) as prod_count from prod_category as cat, products as prod'
 
@@ -51,7 +51,7 @@ route.get('/dashboard', verify, async (req, res) => {
 // })
 
 // +++++++++++++++++++++++++++++++++++++++++++/dashboard/manage_product++++++++++++++++++++++++++++++
-route.get('/dashboard/manage_product', async (req, res) => {
+route.get('/manage_product', verify, async (req, res) => {
     // let query = 'select * from products'
     // let query = 'SELECT products.product_id, products.product_name, prod_category.category_name, prod_category.category_id, prod_category.category_id, products.product_description, products.price, products.in_stock FROM products INNER JOIN prod_category ON products.product_category = prod_category.category_id'
     let query = 'SELECT products.prod_id, products.prod_name, prod_category.categ_name, prod_category.categ_id, products.prod_desc, products.unit_price, products.in_stock FROM products INNER JOIN prod_category ON products.prod_categ_id = prod_category.categ_id'
@@ -69,7 +69,7 @@ route.get('/dashboard/manage_product', async (req, res) => {
 })
 
 //+++++++++++++++++++++++++++++++++++++toggle inStock+++++++++++++++++++++++++++++++++++++++++++++
-route.patch('/dashboard/manage_product/toggleStock', verify, async (req, res) => {
+route.patch('/manage_product/toggleStock', verify, async (req, res) => {
     // console.log(req.body)
     // const 
     let query = 'update products set `in_stock` = ? where prod_id = ?;'
@@ -97,7 +97,7 @@ route.patch('/dashboard/manage_product/toggleStock', verify, async (req, res) =>
 
 })
 //+++++++++++++++++++++++++++++++++++++delete product+++++++++++++++++++++++++++++++++++++++++++++
-route.delete('/dashboard/manage_product/delete_product', verify, async (req, res) => {
+route.delete('/manage_product/delete_product', verify, async (req, res) => {
     console.log(req.body)
     let query = 'delete from products where prod_id = ?;'
 
@@ -116,7 +116,7 @@ route.delete('/dashboard/manage_product/delete_product', verify, async (req, res
 })
 
 // add new product:+++++++++++++++++++++++++++++++++++++++++++++++++++
-route.post('/dashboard/manage_product/add_prod', upload.fields([]), async (req, res) => {
+route.post('/manage_product/add_prod', verify, upload.fields([]), async (req, res) => {
 
     // const prod_id = req.body.id;
     const prod_name = (req.body.name).toLocaleUpperCase();
@@ -145,7 +145,7 @@ route.post('/dashboard/manage_product/add_prod', upload.fields([]), async (req, 
 
 
 
-route.get('/dashboard/manage_product/edit_prod', async (req, res) => {
+route.get('/manage_product/edit_prod', verify, async (req, res) => {
     let query = 'select prod_category.categ_id,prod_category.categ_name from prod_category'
 
     connection.query(query, (err, results, fields) => {
@@ -162,7 +162,7 @@ route.get('/dashboard/manage_product/edit_prod', async (req, res) => {
         }
     })
 })
-route.post('/dashboard/manage_product/edit_prod', upload.fields([]), async (req, res) => {
+route.post('/manage_product/edit_prod', verify, upload.fields([]), async (req, res) => {
 
     const prod_id = req.body.id;
     const prod_name = (req.body.name).toLocaleUpperCase();
@@ -190,7 +190,7 @@ route.post('/dashboard/manage_product/edit_prod', upload.fields([]), async (req,
 })
 
 // ++++++++++++++++++++++++++++SEND PRODUCT INFO FOR ORDER PAGE+++++++++++++++++++++++++++++++++++++++++
-route.get('/dashboard/create_order', async (req, res) => {
+route.get('/create_order', verify, async (req, res) => {
 
     let query = 'select prod_id, prod_name, unit_price from products where in_stock = true'
 
@@ -210,7 +210,7 @@ route.get('/dashboard/create_order', async (req, res) => {
 })
 
 // ++++++++++++++++++++++++++++CREATE ORDER +++++++++++++++++++++++++++++++++++++++++
-route.post('/dashboard/create_order', upload.fields([]), async (req, res) => {
+route.post('/create_order', verify, upload.fields([]), async (req, res) => {
 
 
     let data = req.body;
@@ -251,10 +251,10 @@ route.post('/dashboard/create_order', upload.fields([]), async (req, res) => {
                             }
                             else {
                                 console.log(err);
-                                
+
                             }
                         })
-                        
+
                     }
                     generateBill(ord_id);
                     res.json({ status: "success", message: "Order Placed..." })
@@ -271,9 +271,28 @@ route.post('/dashboard/create_order', upload.fields([]), async (req, res) => {
 
         }
     })
-    // console.log(req.body);
-    // console.log(JSON.parse(req.body.items))
+
 })
+
+
+
+// fetch all bills:============================================================
+route.get('/view_bills', verify, async (req, res) => {
+
+    let query = 'select cust_order.ord_id, customer.cust_name,customer.email,customer.mob_no,cust_order.bill_amount,cust_order.ord_bill from customer inner join cust_order on customer.cust_id = cust_order.ord_id'
+
+    connection.query(query, (err, results, fields) => {
+        // console.log(results)
+        if (!err) {
+            res.json(results);
+        }
+        else {
+            console.log(err)
+            return res.status(500).json(err);
+        }
+    })
+})
+
 
 
 
