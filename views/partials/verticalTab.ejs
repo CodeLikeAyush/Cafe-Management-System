@@ -1,5 +1,5 @@
 <!-- left navigation buttons+++++++++++++++++++++++ -->
-<div class="tab" style="height: 100vh;position: fixed;top: 82px;left: 0px;">
+<div class="tab" style="display: flex;height: 90px;width: 100vw;">
     <button class="tablinks" onclick="openCity(event, 'Dashboard')" id="defaultOpen">Dashboard</button>
     <button class="tablinks"
         onclick="openCity(event, 'Manage Products');fetchProducts();populateOrderTable(event);">Manage
@@ -17,40 +17,41 @@
 
 
 <!-- Dashboard++++++++++++++++++++++++++++++++++++++ -->
-<div style="position: fixed;left: 30%;width: 100%;overflow: scroll;">
+<div>
     <div id="Dashboard" class="tabcontent row">
 
         <div
             style="border: 1px solid #ddd;padding: 12px;font-size: 18px;display: block;height: 60px;margin-bottom: 10px;">
             <h2 style="float: left;font-weight: bold;color: green;">Admin Dashboard</h2>
         </div>
+        <div style="display: flex;flex-wrap: wrap;justify-content: center;">
+            <div class="column">
+                <div class="card">
+                    <h1>
+                        <%=category_count %>
 
-        <div class="column">
-            <div class="card">
-                <h1>
-                    <%=category_count %>
-
-                </h1><br>
-                <h3>Total Category</h3>
-                <!-- <button type="button" class="card_btn">View Categories</button> -->
+                    </h1><br>
+                    <h3>Total Category</h3>
+                    <!-- <button type="button" class="card_btn">View Categories</button> -->
+                </div>
             </div>
-        </div>
-        <div class="column">
-            <div class="card">
-                <h1>
-                    <%= product_count%>
-                </h1><br>
-                <h3>Total Product</h3>
-                <!-- <button type="button" class="card_btn">View Products</button> -->
+            <div class="column">
+                <div class="card">
+                    <h1>
+                        <%= product_count%>
+                    </h1><br>
+                    <h3>Total Product</h3>
+                    <!-- <button type="button" class="card_btn">View Products</button> -->
+                </div>
             </div>
-        </div>
-        <div class="column">
-            <div class="card">
-                <h1>
-                    <%= order_count%>
-                </h1><br>
-                <h3>Total Order</h3>
-                <!-- <button type="button" class="card_btn">View Bills</button> -->
+            <div class="column">
+                <div class="card">
+                    <h1>
+                        <%= order_count%>
+                    </h1><br>
+                    <h3>Total Order</h3>
+                    <!-- <button type="button" class="card_btn">View Bills</button> -->
+                </div>
             </div>
         </div>
 
@@ -66,7 +67,7 @@
             style="border: 1px solid #ddd;padding: 12px;font-size: 18px;display: block;height: 60px;margin-bottom: 10px;">
             <h2 style="float: left;font-weight: bold;color: green;">Manage Products</h2>
             <button onclick="addProductModal(event)"
-                style="float: right;font-weight: bold;margin-right: 80px;width: auto;padding: 10px 18px;background-color: green;color: white; border: none;cursor: pointer;">Add
+                style="float: right;font-weight: bold;width: auto;padding: 10px 18px;background-color: green;color: white; border: none;cursor: pointer;">Add
                 Product
             </button>
 
@@ -84,13 +85,14 @@
         <div
             style="border: 1px solid #ddd;padding: 12px;font-size: 18px;display: block;height: 60px;margin-bottom: 10px;">
             <h2 style="float: left;font-weight: bold;color: green;">Create Order</h2>
-            <button onclick=""
-                style="float: right;font-weight: bold;margin-right: 80px;width: auto;padding: 10px 18px;background-color: green;color: white; border: none;cursor: pointer;">Place
+            <button onclick="document.getElementById('id06').style.display='block'"
+                style="float: right;font-weight: bold;width: auto;padding: 10px 18px;background-color: green;color: white; border: none;cursor: pointer;">Place
                 Order
             </button>
         </div>
-        <input type="text" name="total_bill" id="total_bill" placeholder="Total Bill" value="Total amount: 0" disabled>
         <%- include('../partials/create_order_window'); %>
+            <input type="text" name="total_bill" id="total_bill" placeholder="Total Bill" value="Total amount: 0"
+                disabled>
 
 
 

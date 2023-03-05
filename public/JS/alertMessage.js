@@ -1,5 +1,5 @@
 
-function alert(status, message) {
+function alertMessage(status, message) {
 
     // add onclick event to dismis button(X) of the alert to dismis the alert: 
     var close = document.getElementsByClassName("closebtn");

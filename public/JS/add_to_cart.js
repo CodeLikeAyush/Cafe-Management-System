@@ -7,6 +7,23 @@ fo.addEventListener('submit', (event) => {
 
     let item = data.get('item');
     let quant = data.get('quantity');
+    function getItemId(item) {
+        const storedData = JSON.parse(sessionStorage.getItem('order_page_prod_info'));
+
+        storedData.forEach(data => {
+
+        });
+
+        const check = function (prod_info) {
+            return prod_info.prod_name === item;
+        }
+        let found = storedData.find(check);
+
+        return parseInt(found.prod_id);
+        // console.log(found)
+    }
+    let item_id = getItemId(item)
+    // console.log(item_id)
 
     // getting the session storage:
     let stored_order = window.sessionStorage.getItem('order_items');
@@ -21,7 +38,7 @@ fo.addEventListener('submit', (event) => {
     }
 
     // create new object from the form data
-    let new_order = { item: item, quantity: quant };
+    let new_order = { item: item, quantity: quant, item_id: item_id };
 
     // check if the new-order is already present in the order stored in localstorage:
     const check = function (order) {
@@ -40,5 +57,7 @@ fo.addEventListener('submit', (event) => {
     // console.log(order_info)
     populateOrderTable();
     totalBill();
+    alertMessage("success", "Item Added");
+
 
 })

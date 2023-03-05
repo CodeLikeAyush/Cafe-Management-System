@@ -1,8 +1,9 @@
 function populateOrderTable(event) {
 
     const products = JSON.parse(sessionStorage.getItem('order_items'));
-
-    if (products == null && event.target.classList.contains('tablinks')) {
+    // console.log(products[0])
+    // if (products == null && event.target.classList.contains('tablinks')) {
+    if (products == null) {
         return;
     }
 
@@ -28,13 +29,13 @@ function populateOrderTable(event) {
             <th>Price (&#8377;)</th>
             <th>Quantity</th>
             <th>Total (&#8377;)</th>
-            <th>Delete</th>
+            <th>Remove Item</th>
     </tr>`;
 
     // we are appending other data rows of the table into str2:
     products.forEach(product => {
         str2 =
-            `<tr id="ord_tr_${product.prod_id}" class = "prod">
+            `<tr id="ord_tr_${product.item_id}" class = "prod">
                  <td>${product.item.toUpperCase()}</td>
                  <td>${getPrice(product.item)}</td>
                  <td>${product.quantity}</td>
@@ -42,10 +43,10 @@ function populateOrderTable(event) {
                  <td>
                     <div style="display: flex;">
                         <div style="display:none">
-                            <span>${product.prod_id}</span>
-                            <span>${product.categ_id}</span>
+                            <span>${product.item_id}</span>
+                            <span>${product.item_id}</span>
                         </div>
-                        <span class="material-symbols-outlined delt_icon" title="delete product" onclick="delete_product(event)">delete</span>
+                        <span class="material-symbols-outlined delt_icon" title="remove item" onclick="remove_item(event)">delete</span>
                     </div>
                 </td>
             </tr>`;

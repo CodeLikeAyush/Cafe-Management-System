@@ -2,10 +2,11 @@
     <!-- <span onclick="document.getElementById('id02').style.display='none'" class="close"
         title="Close Modal">&times;</span> -->
     <form id="signup_form" class="modal-content animate">
-        <h1>Sign Up</h1>
-        <p>Please fill in this form to create an account.</p>
-        <hr>
-        <div class="container">
+        <div id="cust_details" class="container" style="border: 1px solid green;padding: 30px;margin: 20px;">
+
+            <h3 style="color:green;">Sign Up</h3><br>
+            <hr><br>
+
 
             <label for="name"><b>Name</b></label>
             <input type="text" placeholder="Enter Name" name="name" id="usr_name" required>
@@ -26,11 +27,16 @@
 
             <!-- <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p> -->
 
-            <div class="clearfix">
-                <button type="button" onclick="document.getElementById('id02').style.display='none'"
-                    class="cancelbtn">Cancel</button>
-                <button type="submit" class="signupbtn">Get OTP</button>
-            </div>
+
+            <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn"
+                style="float: left;font-weight: bold;width: auto;padding: 10px 18px;background-color: red;color: black; border: none;cursor: pointer;">Cancel</button>
+            <button type="reset"
+                style="float: right;font-weight: bold;width: auto;padding: 10px 18px;background-color: red;color: black; border: none;cursor: pointer;">Clear
+                Fields
+            </button><br><br>
+            <button class="modal_btn" type="submit">Get OTP</button>
+
+
         </div>
     </form>
 </div>

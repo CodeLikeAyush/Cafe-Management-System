@@ -15,7 +15,7 @@ async function delete_product(event) {
 
         (event.target.parentElement.parentElement.parentElement).style.display = "none";
 
-        alert(content.status, content.message);
+        alertMessage(content.status, content.message);
         console.log(content);
 
     } catch (err) {

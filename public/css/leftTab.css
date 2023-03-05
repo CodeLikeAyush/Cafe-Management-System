@@ -8,12 +8,27 @@ body {
 
 /* Style the tab */
 .tab {
-    float: left;
+    margin: auto;
     border: 1px solid #ccc;
     background-color: #f1f1f1;
-    width: 30%;
-    height: 100vh;
+    /* overflow-x: scroll; */
+    border-bottom: 5px solid green;
+    margin-bottom: 5px;
 }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.tab::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.tab {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
 
 /* Style the buttons inside the tab */
 .tab button {
@@ -44,11 +59,18 @@ body {
 
 /* Style the tab content */
 .tabcontent {
-    float: left;
-    padding: 0px 12px;
     border: 1px solid #ccc;
-    width: 70%;
-    border-left: none;
-    height: 100vh;
-    overflow: scroll;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.tabcontent::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.tabcontent {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
 }

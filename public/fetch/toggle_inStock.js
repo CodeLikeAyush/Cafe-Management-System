@@ -18,7 +18,7 @@ async function toggleStock(event) {
         const content = await rawResponse.json();
 
         console.log(content);
-        alert(content.status, content.message);
+        alertMessage(content.status, content.message);
 
     } catch (err) {
         console.log(err)

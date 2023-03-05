@@ -1,68 +1,46 @@
 <div>
-    <!-- Customer details -->
-    <form action="#" id="cust_detail_form">
-    </form>
-
-    <div id="cust_details" style="border: 1px solid green;padding: 30px;margin: 20px;">
-        <h3 style="color:green;">Customer Details</h3><br>
-        <hr><br>
-        <label for="name"><b>Name</b></label>
-        <input type="text" name="name" id="cust_name" placeholder="Customer Name" form="cust_detail_form" required>
-
-        <label for="email"><b>Email</b></label>
-        <input type="email" name="name" id="cust_email" placeholder="Customer Email" form="cust_detail_form" required>
-
-        <label for="mob_no"><b>Mobile Number</b></label>
-        <input type="text" name="mob_no" id="cust_mob" placeholder="Customer Mobile Number" form="cust_detail_form"
-            required>
-
-        <button type="reset"
-            style="float: right;font-weight: bold;margin-right: 80px;width: auto;padding: 10px 18px;background-color: red;color: black; border: none;cursor: pointer;">Clear
-            Fields
-        </button><br><br>
-    </div>
-
 
     <!-- Product details -->
-    <form action="#" id="prod_detail_form">
+    <form id="prod_detail_form" action="#">
+
+
+        <div id="choose_prod" style="border: 1px solid green;padding: 30px;margin: 20px;">
+            <h3 style="color:green;">Choose Product</h3><br>
+            <hr><br>
+            <label for="item"><b>Item</b></label>
+            <input list="order_prod_list" id="item" name="item" placeholder="Search or Choose"
+                onchange="populate_price(event)" required />
+            <datalist id="order_prod_list">
+                <!-- here these kind of options will be injected by javascript: -->
+                <!-- <option value="Microsoft Edge"></option> -->
+            </datalist>
+
+            <label for="quantity"><b>Quantity</b></label>
+            <input type="number" name="quantity" id="item_quant" min="1" max="10" onchange="update_price(event)"
+                disabled required>
+
+            <label for="unit_price"><b>Unit Price</b></label>
+            <input type="number" name="unit_price" id="item_price" disabled>
+
+            <label for="total_price"><b>Total</b></label>
+            <input type="number" name="total" id="total_price" disabled>
+
+            <button
+                style="float: right;font-weight: bold;margin-right: 80px;width: auto;padding: 10px 18px;background-color: green;color: white; border: none;cursor: pointer;">Add
+                Item
+            </button>
+
+            <button type="reset"
+                style="float: right;font-weight: bold;margin-right: 80px;width: auto;padding: 10px 18px;background-color: red;color: black; border: none;cursor: pointer;">Clear
+                Fields
+            </button><br><br>
+
+        </div>
     </form>
 
-
-    <div id="choose_prod" style="border: 1px solid green;padding: 30px;margin: 20px;">
-        <h3 style="color:green;">Choose Product</h3><br>
-        <hr><br>
-        <label for="item"><b>Item</b></label>
-        <input list="order_prod_list" id="item" name="item" placeholder="Search or Choose"
-            onchange="populate_price(event)" form="prod_detail_form" required />
-        <datalist id="order_prod_list">
-            <!-- here these kind of options will be injected by javascript: -->
-            <!-- <option value="Microsoft Edge"></option> -->
-        </datalist>
-
-        <label for="quantity"><b>Quantity</b></label>
-        <input type="number" name="quantity" id="item_quant" min="1" max="10" onchange="update_price(event)"
-            form="prod_detail_form" disabled required>
-
-        <label for="unit_price"><b>Unit Price</b></label>
-        <input type="number" name="unit_price" id="item_price" form="prod_detail_form" disabled>
-
-        <label for="total_price"><b>Total</b></label>
-        <input type="number" name="total" id="total_price" form="prod_detail_form" disabled>
-
-        <button
-            style="float: right;font-weight: bold;margin-right: 80px;width: auto;padding: 10px 18px;background-color: green;color: white; border: none;cursor: pointer;">Add
-            Item
-        </button>
-
-        <button type="reset"
-            style="float: right;font-weight: bold;margin-right: 80px;width: auto;padding: 10px 18px;background-color: red;color: black; border: none;cursor: pointer;">Clear
-            Fields
-        </button><br><br>
-
-    </div>
 </div>
 
-<div style="min-height: 500px;">
+<div>
     <%- include('../partials/create_order_table'); %>
 
 </div>

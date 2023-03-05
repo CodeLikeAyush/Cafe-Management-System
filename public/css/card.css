@@ -8,10 +8,9 @@ body {
 
 /* Float four columns side by side */
 .column {
-    float: left;
+    /* float: left; */
     width: 25%;
     padding: 0 10px;
-    margin: auto
 }
 
 /* Remove extra left and right margins, due to padding */
@@ -40,7 +39,7 @@ body {
     /* box-shadow: 0 12px 28px 0 rgb(5 3 3 / 98%); */
     padding: 16px;
     text-align: center;
-    margin: 103px 5px;
+    margin: 103px auto;
     background-color: green;
     color: white;
     height: 220px;
@@ -51,11 +50,14 @@ body {
     justify-content: center;
     border-radius: 100%;
     /* border: 6px solid red; */
+    transition: transform .3s;
 }
-.card:hover{
-    scale: 1.01;
+
+.card:hover {
+    transform: scale(1.3);
     cursor: pointer;
 }
+
 .card_btn {
     width: 100%;
     padding: 14px 20px;

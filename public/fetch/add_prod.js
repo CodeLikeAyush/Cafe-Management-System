@@ -47,7 +47,7 @@ add_prod_form.addEventListener('submit', async (event) => {
 
         document.getElementById('id05').style.display = 'none';
 
-        alert(content.status, content.message);
+        alertMessage(content.status, content.message);
 
     } catch (err) {
         console.log(err)

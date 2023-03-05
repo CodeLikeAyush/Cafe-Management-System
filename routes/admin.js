@@ -2,8 +2,12 @@ const connection = require('../connection');
 const sendMail = require('../sendMail');
 const secretKey = require('../secretKey');
 const verify = require('../verify');
+const generateBill = require('../bill_generator')
+
 
 const express = require('express');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 var multer = require('multer');
 var upload = multer();
 
@@ -185,13 +189,13 @@ route.post('/dashboard/manage_product/edit_prod', upload.fields([]), async (req,
 
 })
 
-// ++++++++++++++++++++++++++++++CREATE ORDER++++++++++++++++++++++++++++++++++++++++++++++++++++
+// ++++++++++++++++++++++++++++SEND PRODUCT INFO FOR ORDER PAGE+++++++++++++++++++++++++++++++++++++++++
 route.get('/dashboard/create_order', async (req, res) => {
 
     let query = 'select prod_id, prod_name, unit_price from products where in_stock = true'
 
     connection.query(query, (err, results, fields) => {
-        console.log(results)
+        // console.log(results)
         if (!err) {
             res.json(results)
             // res.json({ status: "success", message: "Product Stock Updated..." })
@@ -203,6 +207,72 @@ route.get('/dashboard/create_order', async (req, res) => {
 
         }
     })
+})
+
+// ++++++++++++++++++++++++++++CREATE ORDER +++++++++++++++++++++++++++++++++++++++++
+route.post('/dashboard/create_order', upload.fields([]), async (req, res) => {
+
+
+    let data = req.body;
+    // console.log(data)
+    let items = JSON.parse(data.items);
+    // console.log(items);
+
+    const tokenVerificationResult = await jwt.verify(req.cookies.token, process.env.ACCESS_TOKEN);
+    // console.log(tokenVerificationResult)
+
+    let customer_id = -1;
+    bill_amount = data.bill_amount;
+    let ord_id = -1;
+
+
+
+    let query = ' insert into customer (cust_name,email,mob_no) values(?,?,?)';
+    connection.query(query, [data.name, data.email, data.mob_no], (err, results, fields) => {
+        if (!err) {
+            // console.log(results);
+            // console.log(results.insertId);
+            customer_id = results.insertId;
+            // res.json({ message: 'order received' });
+            query = 'insert into cust_order (cust_id,ord_processed_by) values(? ,(select user_id from users where user_email = ?))'
+
+            connection.query(query, [customer_id, tokenVerificationResult.email], async (err, results, fields) => {
+                if (!err) {
+                    // console.log(results);
+                    // console.log(results.insertId);
+                    ord_id = results.insertId;
+                    let query = 'insert into ord_prod_relation_table (ord_id,prod_id,quantity,unit_price) values(?,?,?,(select unit_price from products where prod_id = ?))'
+                    for (let i = 0; i < items.length; i++) {
+                        const item = items[i];
+                        connection.query(query, [ord_id, item.item_id, item.quantity, item.item_id], (err, results, fields) => {
+                            if (!err) {
+                                console.log(results);
+                                // console.log(results.insertId);
+                            }
+                            else {
+                                console.log(err);
+                                
+                            }
+                        })
+                        
+                    }
+                    generateBill(ord_id);
+                    res.json({ status: "success", message: "Order Placed..." })
+                }
+                else {
+                    console.log(err);
+                    res.json({ message: err });
+                }
+            })
+        }
+        else {
+            console.log(err);
+            res.json({ message: err });
+
+        }
+    })
+    // console.log(req.body);
+    // console.log(JSON.parse(req.body.items))
 })
 
 
