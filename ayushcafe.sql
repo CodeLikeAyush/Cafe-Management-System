@@ -23,12 +23,12 @@ values (
 -- CREATE user_auth table:
 CREATE TABLE IF NOT EXISTS user_auth(
    auth_id int not NULL auto_increment,
-   user_id int not NULL,
+   user_id int unique not NULL,
    user_passw varchar(255) not null,
    email_otp VARCHAR(10) default null,
    otp_dt_time TIMESTAMP default CURRENT_TIMESTAMP on UPDATE CURRENT_TIMESTAMP,
-   authorized bool null,
-   verified bool null,
+   authorized bool default 0,
+   verified bool default 0,
    constraint pk_auth_id primary key(auth_id),
    -- CONSTRAINT fk_auth_id_of_user_id FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE
    CONSTRAINT fk_auth_id_of_user_id FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE

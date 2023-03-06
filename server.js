@@ -13,6 +13,7 @@ const adminRoute = require('./routes/admin');
 const loginRoute = require('./routes/login');
 const logoutRoute = require('./routes/logout');
 const signupRoute = require('./routes/signup');
+const verifyEmailRoute = require('./routes/verify_email');
 
 const verify = require('./verify');
 const connection = require('./connection');
@@ -34,6 +35,7 @@ app.use(cookieParser()); // for parsing cookies
 
 app.use('/signup', signupRoute);
 app.use('/login', loginRoute);
+app.use('/verify', verifyEmailRoute);
 app.use('/logout', logoutRoute);
 app.use('/user', userRoute);
 app.use('/admin', adminRoute);
@@ -49,23 +51,18 @@ app.use(cors());
 app.set('view engine', 'ejs')
 
 app.get('/', verify, function (req, res) {
-    // const role = req.cookies.role;
-    // if (role === "admin") {
+
     let query = 'select COUNT(distinct cat.categ_id) as cat_count,COUNT(distinct prod.prod_id) as prod_count,COUNT(distinct ord.ord_id) as ord_count from prod_category as cat, products as prod, cust_order as ord'
 
     connection.query(query, (err, results, fields) => {
         if (!err) {
-            res.render("pages/admin_dashboard", { prod_count: results[0].prod_count, categ_count: results[0].cat_count,ord_count:results[0].ord_count });
+            res.render("pages/admin_dashboard", { prod_count: results[0].prod_count, categ_count: results[0].cat_count, ord_count: results[0].ord_count });
         } else {
             console.log(err)
             return res.status(500).json(err);
         }
     })
-    // }
-    // else if (role === "user") {
-    //     res.render('pages/about')
 
-    // }
 
 })
 app.listen(port, () => console.log(`Server is online at: http://localhost:${port}`));

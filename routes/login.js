@@ -5,6 +5,8 @@ const connection = require('../connection');
 
 const express = require('express');
 const jwt = require('jsonwebtoken');
+var multer = require('multer');
+var upload = multer();
 // const cookieParser = require('cookie-parser');
 
 
@@ -13,55 +15,49 @@ const jwt = require('jsonwebtoken');
 
 const route = express.Router();
 
-route.post('/', (req, res) => {
+route.post('/', upload.fields([]), (req, res) => {
 
     const user = req.body;
+    console.log(user);
+    // console.log(user)
 
-    // query = 'select email, password,role,status from users where `email` = ?'
-    // query = 'select (user.email) as email, (userAuth.user_passw) as pass,(userAuth.athorized) as authorized from users as user,user_auth as userAuth where `email` = ?'
-    let query = ' select usr.user_email,auth.user_passw,auth.authorized from users as usr,user_auth as auth where usr.user_email = ?'
-    console.log(user)
+    let query = ' select users.user_email, user_auth.user_passw,user_auth.authorized,user_auth.verified from users inner join user_auth on users.user_id = user_auth.user_id where users.user_email = ?'
     connection.query(query, [user.email], (err, results, fields) => {
-        // console.log(results)
+        console.log(results)
         if (!err) {
-            if (results[0].length <= 0 || results[0].user_passw != user.password) {
-                res.json({ message: "Incorrect username or password" })
+            if (results.length <= 0 || results[0].user_passw != user.password) {
+                console.log("1")
+                res.json({ status: "danger", message: "Incorrect username or password" })
+
             }
-            else if (results[0].authorized == 'false') {
-                res.json({ message: "You are not approved by Admin" })
+            else if (results[0].verified == 0) {
+                console.log("1a")
+                res.json({ status: "danger", message: "Please verify your account" })
+
+
+            }
+            else if (results[0].authorized == 0) {
+                console.log("2")
+                res.json({ status: "warning", message: "You are not approved by Admin" })
+
             }
             else if (results[0].user_passw == user.password) {
+                console.log("3")
                 const response = { email: results[0].user_email }
                 const accessToken = jwt.sign(response, process.env.ACCESS_TOKEN, { expiresIn: '1h' })
 
-                // res.json({ token: accessToken });
                 res.cookie("token", accessToken, { maxAge: 3600000 })
-                // res.cookie("role", results[0].role, { maxAge: 3600000 })
 
-                // if (results[0].role == 'admin') {
                 res.redirect("/admin");
-                // let query = 'select COUNT(distinct cat.categ_id) as cat_count,COUNT(distinct prod.prod_id) as prod_count,COUNT(distinct ord.ord_id) as ord_count from prod_category as cat, products as prod, cust_order as ord'
-                // connection.query(query, (err, results, fields) => {
-                //     if (!err) {
-                //         res.render("pages/admin_dashboard", { prod_count: results[0].prod_count, categ_count: results[0].cat_count, ord_count: results[0].ord_count });
-                //     } else {
-                //         console.log(err)
-                //         return res.status(500).json(err);
-                //     }
-                // })
-                // res.render('pages/admin_dashboard')
-                
-                // } else if (results[0].role == 'user') {
-                // res.render('pages/about.ejs')
-                // res.redirect("/user");
 
-                // }
             }
             else {
+                console.log("4")
                 return res.status(400).json({ message: "Something went wrong please try again" })
             }
         }
         else {
+            console.log("5")
             return res.status(500).json("sqlMessage" + err["sqlMessage"]);
         }
     })

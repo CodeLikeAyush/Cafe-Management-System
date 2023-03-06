@@ -1,24 +1,20 @@
 <div id="id03" class="modal">
 
-    <form class="modal-content animate" action="/action_page.php" method="post">
+    <form id="verify_email_form" class="modal-content animate" action="#">
         <div id="cust_details" class="container" style="border: 1px solid green;padding: 30px;margin: 20px;">
 
             <div class="imgcontainer">
-                <!-- <span onclick="document.getElementById('id03').style.display='none'" class="close" -->
-                <!-- title="Close Modal">&times;</span> -->
                 <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Avatar" class="avatar">
             </div>
 
             <div class="container">
                 <label for="email"><b>Email</b></label>
                 <input type="email" placeholder="Enter Email" name="email" required>
+                <label for="otp"><b>Email</b></label>
+                <input type="text" placeholder="Enter OTP" name="otp" required>
             </div>
 
-            <!-- <div class="container" style="background-color:#f1f1f1">
-                <button type="button" onclick="document.getElementById('id03').style.display='none'"
-                    class="cancelbtn">Cancel</button>
-                <span class="psw">Forgot <a href="#">password?</a></span> -->
-            <!-- </div>  -->
+          
 
             <button type="button" onclick="document.getElementById('id03').style.display='none'" class="cancelbtn"
                 style="float: left;font-weight: bold;width: auto;padding: 10px 18px;background-color: red;color: black; border: none;cursor: pointer;">Cancel</button>
@@ -26,7 +22,7 @@
                 style="float: right;font-weight: bold;width: auto;padding: 10px 18px;background-color: red;color: black; border: none;cursor: pointer;">Clear
                 Fields
             </button><br><br>
-            <button class="modal_btn" type="submit">Add Product</button>
+            <button class="modal_btn" type="submit">Verify Email</button>
 
         </div>
     </form>
