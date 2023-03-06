@@ -1,10 +1,10 @@
-// <!-- ++++++++++++++++++++++++++++manage-products-table-list-filter-script+++++++++++++++++++++++++++++++++++++ -->
+// <!-- ++++++++++++++++++++++++++++manage-category-table-list-filter-script+++++++++++++++++++++++++++++++++++++ -->
 
-function filterProducts() {
+function filterCategory() {
     var input, filter, table, tr, td, i, txtValue;
-    input = document.getElementById("myprodInput");
+    input = document.getElementById("mycategInput");
     filter = input.value.toUpperCase();
-    table = document.getElementById("productTable");
+    table = document.getElementById("categTable");
     tr = table.getElementsByTagName("tr");
     for (i = 0; i < tr.length; i++) {
         td = tr[i].getElementsByTagName("td")[0];

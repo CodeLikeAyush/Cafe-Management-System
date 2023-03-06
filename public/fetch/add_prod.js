@@ -22,6 +22,10 @@ add_prod_form.addEventListener('submit', async (event) => {
 
 
         console.log(content);
+        if (content.status == 'danger') {
+            alertMessage(content.status, content.message);
+            return;
+        }
 
         let newRow = `<tr id="prod_tr_${content.prod_id}" class = "prod">
         <td>${prod_name.toUpperCase()}</td>
@@ -45,7 +49,8 @@ add_prod_form.addEventListener('submit', async (event) => {
         prevRows += newRow;
         document.getElementById("productTable").innerHTML = prevRows;
 
-        document.getElementById('id05').style.display = 'none';
+        // document.getElementById('id05').style.display = 'none';
+
 
         alertMessage(content.status, content.message);
 

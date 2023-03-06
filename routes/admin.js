@@ -291,7 +291,73 @@ route.get('/view_bills', verify, async (req, res) => {
         }
     })
 })
+// fetch all category:============================================================
+route.get('/manage_category', verify, async (req, res) => {
 
+    let query = ' select categ_id,categ_name,(select count(prod_id) from products where prod_categ_id = categ_id) as prod_count from prod_category'
+
+    connection.query(query, (err, results, fields) => {
+        // console.log(results)
+        if (!err) {
+            res.json(results);
+        }
+        else {
+            console.log(err)
+            return res.status(500).json(err);
+        }
+    })
+})
+
+
+// add new category:+++++++++++++++++++++++++++++++++++++++++++++++++++
+route.post('/manage_category/add_category', verify, upload.fields([]), async (req, res) => {
+
+    // const prod_id = req.body.id;
+    const category_name = (req.body.category).toLocaleUpperCase();
+    // const prod_categ = (req.body.category).toLocaleUpperCase();
+    // const prod_desc = (req.body.description).toLocaleUpperCase();
+    // const prod_price = req.body.price;
+
+    let query = 'insert into prod_category (categ_name) VALUES (?)'
+
+    connection.query(query, [category_name], (err, results, fields) => {
+        console.log(results);
+        if (!err) {
+            console.log(results)
+            res.json({ status: "success", message: "Category added...", categ_id: results.insertId })
+
+        }
+        else {
+            console.log(err)
+            res.json({ status: "danger", message: `${category_name} already exists` })
+
+        }
+    })
+
+
+})
+
+
+
+
+//+++++++++++++++++++++++++++++++++++++delete category+++++++++++++++++++++++++++++++++++++++++++++
+route.delete('/manage_category/delete_category', verify, async (req, res) => {
+    console.log(req.body)
+    let query = 'delete from prod_category where categ_id = ?;'
+
+    connection.query(query, [req.body.categ_id], (err, results, fields) => {
+        if (!err) {
+            console.log(results)
+            res.json({ status: "warning", message: "Category Deleted..." })
+        }
+        else {
+            console.log(err)
+            res.json({ status: "danger", message: "Category Deletion Failed..." })
+        }
+    })
+
+
+})
 
 
 

@@ -28,6 +28,7 @@
 
         #productTable,
         #billsTable,
+        #categTable,
         #orderTable {
             border-collapse: collapse;
             width: 100%;
@@ -38,9 +39,10 @@
         #productTable th,
         #billsTable th,
         #orderTable th,
-        #billsTable th,
+        #categTable th,
         #productTable td,
         #billsTable td,
+        #categTable td,
         #orderTable td {
             text-align: left;
             padding: 12px;
@@ -48,17 +50,19 @@
 
         #productTable tr,
         #billsTable tr,
+        #categTable tr,
         #orderTable tr {
             border-bottom: 1px solid #ddd;
         }
 
-        #orderTable tr.header,
+
         #billsTable tr.header,
-        #productTable tr:hover,
+        #productTable tr.header,
+        #orderTable tr.header,
+        #categTable tr.header,
         #billsTable tr:hover,
-        #orderTable tr.header,
-        #billsTable tr.header,
-        #productTable tr:hover,
-        #billsTable tr:hover {
+        #categTable tr:hover,
+        #orderTable tr:hover,
+        #productTable tr:hover {
             background-color: #f1f1f1;
         }

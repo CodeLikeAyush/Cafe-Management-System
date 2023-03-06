@@ -84,12 +84,12 @@ route.post('/', upload.fields([]), (req, res) => {
                         connection.query(query, [otp, user.email], (err, results, fields) => {
                             if (!err) {
                                 console.log(results)
-                                const subject = "OTP verification"
+                                const subject = "OTP Ayush Cafe"
                                 const html = ` 
                                 <h2>Hi user</h2>
-                                <p>Here is your otp for verification</p>
+                                <p>Here is your otp please proceed to verify your account</p>
                                 <h2>${otp}</h2>
-                                <a href="google.com">Verify Account</a>
+                                <a href="http://localhost:8080/">Verify Account</a>
                             `
                                 sendMail(user.email, subject, html)
                             }
