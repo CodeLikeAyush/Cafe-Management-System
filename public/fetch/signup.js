@@ -5,6 +5,10 @@ signup_form.addEventListener('submit', async (event) => {
 
     let formdata = new FormData(signup_form);
 
+    // const name = formdata.get('name').toUpperCase();
+    const email = formdata.get('email').toUpperCase();
+    const passw = formdata.get('password');
+    const passw_repeat = formdata.get('password-repeat');
 
     if (passw != passw_repeat) {
         window.alert("Password not maching");
