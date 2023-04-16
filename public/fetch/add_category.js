@@ -18,6 +18,7 @@ add_categ_form.addEventListener('submit', async (event) => {
             method: 'post',
             body: formdata
         });
+
         const content = await rawResponse.json();
 
 

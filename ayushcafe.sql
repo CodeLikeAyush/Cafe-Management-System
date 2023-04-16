@@ -9,17 +9,16 @@ CREATE table if not exists users(
    user_id int not null auto_increment,
    user_name VARCHAR(255) not NULL,
    user_email VARCHAR(255) not NULL unique,
-   mob_no VARCHAR(50) not NULL,
    constraint pk_user_id primary key(user_id)
 );
 -- INSERT data into users:
-insert into users(user_id, user_name, user_email, mob_no)
-values (
-      1,
-      "Ayush Raj",
-      "ayushjnv25@gmail.com",
-      "1234567890"
-   );
+-- insert into users(user_id, user_name, user_email, mob_no)
+-- values (
+--       1,
+--       "Ayush Raj",
+--       "ayushjnv25@gmail.com",
+--       "1234567890"
+--    );
 -- CREATE user_auth table:
 CREATE TABLE IF NOT EXISTS user_auth(
    auth_id int not NULL auto_increment,

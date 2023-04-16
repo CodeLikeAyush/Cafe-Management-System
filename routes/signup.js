@@ -5,6 +5,7 @@ const sendMail = require('../sendMail');
 
 const express = require('express');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 // const cookieParser = require('cookie-parser');
 var multer = require('multer');
 var upload = multer();
@@ -28,16 +29,17 @@ route.post('/', upload.fields([]), (req, res) => {
             if (results.length <= 0) {// email is not registered so register it
 
                 // 1. insert into users table:
-                query = 'insert into users (user_name,user_email,mob_no) values(?,?,?)'
-                connection.query(query, [user.name, user.email, user.password], (err, results, fields) => {
+                query = 'insert into users (user_name,user_email) values(?,?)'
+                connection.query(query, [user.name, user.email], async (err, results, fields) => {
                     if (!err) {
                         // console.log(results.insertId);
                         const user_id = results.insertId;
 
                         const otp = (Math.floor(Math.random() * 1000000)).toString();
+                        password = await bcrypt.hash(user.password, 10);
                         // 1. insert pass,otp etc. into user_auth table and send mail:
                         query = 'insert into user_auth (user_id,user_passw,email_otp) values (?,?,?)'
-                        connection.query(query, [user_id, user.password, otp,], (err, results, fields) => {
+                        connection.query(query, [user_id, password, otp,], (err, results, fields) => {
                             console.log(results);
                             if (!err) {
                                 const subject = "OTP verification"
@@ -69,6 +71,7 @@ route.post('/', upload.fields([]), (req, res) => {
 
                 query = 'select verified from user_auth where user_id = (select user_id from users where user_email = ?) '
                 connection.query(query, [results[0].user_email], (err, results, fields) => {
+                    console.log(results)
                     if (results[0].verified) {// registered user is verified so tell him to login
                         console.log("verified please login")
                         res.json({ status: "success", message: "You are aleady verified please proceed to  login to your account" })

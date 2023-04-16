@@ -15,6 +15,12 @@ async function toggleStock(event) {
             },
             body: JSON.stringify({ inStock: inStock, id: id })
         });
+        console.log(rawResponse)
+
+        // if (rawResponse.redirected == true) {
+        //     window.location = rawResponse.url;
+        //     return;
+        // }
         const content = await rawResponse.json();
 
         console.log(content);

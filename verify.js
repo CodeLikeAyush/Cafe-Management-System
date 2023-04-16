@@ -3,12 +3,13 @@ const verify = async (req, res, next) => {
     require('dotenv').config();
     try {
 
+
         const tokenVerificationResult = await jwt.verify(req.cookies.token, process.env.ACCESS_TOKEN); // this returns the payload of token.
         // console.log(tokenVerificationResult);
         next();
 
     } catch (err) {
-        // console.log(err);
+        console.log(err);
         res.render('pages/landing')
     }
 
