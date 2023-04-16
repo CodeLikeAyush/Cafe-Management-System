@@ -44,7 +44,7 @@ route.post('/', upload.fields([]), (req, res) => {
                 const response = { email: results[0].user_email }
                 const accessToken = jwt.sign(response, process.env.ACCESS_TOKEN, { expiresIn: '1h' })
 
-                res.cookie("token", accessToken, { maxAge: 3600000 })
+                res.cookie("token", accessToken, { maxAge: 3600000, httpOnly: true, secure: true, sameSite: 'strict' })
 
                 res.redirect("/admin");
 
