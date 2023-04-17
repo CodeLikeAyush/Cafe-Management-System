@@ -50,11 +50,13 @@ app.use(cors());
 // View Engine Setup
 app.set('view engine', 'ejs')
 
-app.get('/', verify, function (req, res) {
+app.get('/', verify, (req, res) => {
 
-    let query = 'select COUNT(distinct cat.categ_id) as cat_count,COUNT(distinct prod.prod_id) as prod_count,COUNT(distinct ord.ord_id) as ord_count from prod_category as cat, products as prod, cust_order as ord'
+    let query = 'SELECT (SELECT COUNT(*) FROM prod_category) as cat_count, (SELECT COUNT(*) FROM products) as prod_count, (SELECT COUNT(*) FROM cust_order) as ord_count'
 
     connection.query(query, (err, results, fields) => {
+        // console.log(results)
+
         if (!err) {
             res.render("pages/admin_dashboard", { prod_count: results[0].prod_count, categ_count: results[0].cat_count, ord_count: results[0].ord_count });
         } else {

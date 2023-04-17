@@ -20,7 +20,7 @@ const route = express.Router();
 // +++++++++++++++++++++++++++++++++++Dashboard++++++++++++++++++++++++++++++++++++++++++++++++
 route.get('/', verify, async (req, res) => {
     // let query = 'select COUNT(distinct cat.category_id) as cat_count,COUNT(distinct prod.product_id) as prod_count from prod_category as cat, products as prod'
-    let query = 'select COUNT(distinct cat.categ_id) as cat_count,COUNT(distinct prod.prod_id) as prod_count,COUNT(distinct ord.ord_id) as ord_count from prod_category as cat, products as prod, cust_order as ord'
+    let query = 'SELECT (SELECT COUNT(*) FROM prod_category) as cat_count, (SELECT COUNT(*) FROM products) as prod_count, (SELECT COUNT(*) FROM cust_order) as ord_count'
 
 
     connection.query(query, (err, results, fields) => {

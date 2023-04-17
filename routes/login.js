@@ -23,9 +23,12 @@ route.post('/', upload.fields([]), (req, res) => {
 
     let query = ' select users.user_email, user_auth.user_passw,user_auth.authorized,user_auth.verified from users inner join user_auth on users.user_id = user_auth.user_id where users.user_email = ?'
     connection.query(query, [user.email], async (err, results, fields) => {
+        if (results.length == 0) {
+            res.json({ status: "danger", message: "Incorrect username or password" })
+            return;
+        }
         var passwordMatch = await bcrypt.compare(user.password, results[0].user_passw);
         // console.log(passwordMatch)
-        // console.log(results)
         if (!err) {
             if (results.length <= 0 || !passwordMatch) {
                 res.json({ status: "danger", message: "Incorrect username or password" })
