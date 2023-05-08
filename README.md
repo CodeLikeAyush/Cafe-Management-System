@@ -38,6 +38,12 @@ This project gave me a greate learning curve on implementing my theoretical skil
 
 ## Before you Run Locally
 
+* Working fine for:
+   * Node Version: v18.16.0
+   * NPM Version: 9.5.1
+
+
+
 * Download and install **[NodeJs](https://nodejs.org/en/download)**
 * Download and install **[Git](https://git-scm.com/downloads)**
 * Download and install **[MySql](https://dev.mysql.com/downloads/installer/)**
