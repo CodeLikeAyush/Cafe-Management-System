@@ -41,6 +41,7 @@ This project gave me a greate learning curve on implementing my theoretical skil
 * Working fine for:
    * Node Version: v18.16.0
    * NPM Version: 9.5.1
+   * Server version: 8.0.31 MySQL Community Server - GPL
 
 
 
