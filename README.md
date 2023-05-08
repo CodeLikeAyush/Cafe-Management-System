@@ -248,7 +248,7 @@ Install dependencies
 ```
 
 
-Create a `.env` file and add these contents to the file:
+Create a `.env` file in root directory of the project(Note: root directory has files such as: `package.json` etc. ) and add these contents to the file:
 (Note: add your own credentials the below shown is just for reference. Dont change key of the environment variables)
 
 ```bash
