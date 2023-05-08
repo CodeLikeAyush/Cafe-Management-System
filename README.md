@@ -246,6 +246,28 @@ Install dependencies
   npm install
 ```
 
+
+Create a `.env` file and add these contents to the file:
+(Note: add your own credentials the below shown is just for reference. Dont change key of the environment variables)
+
+```bash
+// server
+PORT = 8080
+
+//connection
+DB_NAME = ayushcafe
+DB_HOST = localhost
+DB_PORT  = 3306
+DB_USERNAME = root
+DB_PASSWORD = @123
+
+
+ACCESS_TOKEN = 3431ba8960559ee197d48b793af3a10cf724eb087d88b29e7976f65657261146c66ce94dc9b84e551aef79b7914a845debe9034413779913ff4d5d9f7622ee9f
+
+EMAIL = achkon@zohomail.in
+PASSWORD = A2rJLwmz3zHe```
+```
+
 Start the server
 
 ```bash
