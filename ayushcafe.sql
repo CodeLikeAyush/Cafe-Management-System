@@ -1,155 +1,149 @@
--- drop ayushcafe DATABASE if it not exists:
-DROP DATABASE if exists ayushcafe;
--- CREATE ayushcafe DATABASE:
+-- Drop ayushcafe database if it exists
+DROP DATABASE IF EXISTS ayushcafe;
+
+-- Create ayushcafe database
 CREATE DATABASE ayushcafe;
--- use ayushcafe DATABASE:
+
+-- Use ayushcafe database
 USE ayushcafe;
--- CREATE users table:
-CREATE table if not exists users(
-   user_id int not null auto_increment,
-   user_name VARCHAR(255) not NULL,
-   user_email VARCHAR(255) not NULL unique,
-   constraint pk_user_id primary key(user_id)
+
+-- Create users table
+CREATE TABLE IF NOT EXISTS users (
+   user_id INT NOT NULL AUTO_INCREMENT,
+   user_name VARCHAR(255) NOT NULL,
+   user_email VARCHAR(255) NOT NULL UNIQUE,
+   CONSTRAINT pk_user_id PRIMARY KEY (user_id)
 );
--- INSERT data into users:
--- insert into users(user_id, user_name, user_email, mob_no)
--- values (
---       1,
---       "Ayush Raj",
---       "ayushjnv25@gmail.com",
---       "1234567890"
---    );
--- CREATE user_auth table:
-CREATE TABLE IF NOT EXISTS user_auth(
-   auth_id int not NULL auto_increment,
-   user_id int unique not NULL,
-   user_passw varchar(255) not null,
-   email_otp VARCHAR(10) default null,
-   otp_dt_time TIMESTAMP default CURRENT_TIMESTAMP on UPDATE CURRENT_TIMESTAMP,
-   authorized bool default 0,
-   verified bool default 0,
-   constraint pk_auth_id primary key(auth_id),
-   -- CONSTRAINT fk_auth_id_of_user_id FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE
+
+-- Inser into users table
+INSERT INTO users (user_name, user_email)
+VALUES ("Ayush Raj", "ayush@gmail.com");
+
+
+-- Create user_auth table
+CREATE TABLE IF NOT EXISTS user_auth (
+   auth_id INT NOT NULL AUTO_INCREMENT,
+   user_id INT NOT NULL UNIQUE,
+   user_passw VARCHAR(255) NOT NULL,
+   email_otp VARCHAR(10) DEFAULT NULL,
+   otp_dt_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+   authorized BOOL DEFAULT 0,
+   verified BOOL DEFAULT 0,
+   CONSTRAINT pk_auth_id PRIMARY KEY (auth_id),
    CONSTRAINT fk_auth_id_of_user_id FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
--- INSERT data into user_auth:
-insert into user_auth(user_id, user_passw, authorized, verified)
-values (1, "12345", true, true);
--- CREATE customer table:
-create table if not exists customer(
-   cust_id int not null auto_increment,
-   cust_name varchar(255) not null,
-   email varchar(255) not null,
-   mob_no varchar(255) not null,
-   constraint pk_cust_id primary key (cust_id)
+
+-- Insert data into user_auth
+INSERT INTO user_auth (user_id, user_passw, authorized, verified)
+VALUES (1, '12345', TRUE, TRUE);
+
+-- Create customer table
+CREATE TABLE IF NOT EXISTS customer (
+   cust_id INT NOT NULL AUTO_INCREMENT,
+   cust_name VARCHAR(255) NOT NULL,
+   email VARCHAR(255) NOT NULL,
+   mob_no VARCHAR(255) NOT NULL,
+   CONSTRAINT pk_cust_id PRIMARY KEY (cust_id)
 );
--- INSERT data into customer:
--- insert into customer(cust_name, email, mob_no)
--- values (
---       "Anurag Upadhyay",
---       "anurag@gmail.com",
---       "7894561230"
---    );
--- CREATE prod_category table:
-create table if not exists prod_category(
-   categ_id int not null auto_increment,
-   categ_name varchar(255) not null unique,
-   constraint pk_categ_id primary key (categ_id)
+
+-- Create prod_category table
+CREATE TABLE IF NOT EXISTS prod_category (
+   categ_id INT NOT NULL AUTO_INCREMENT,
+   categ_name VARCHAR(255) NOT NULL UNIQUE,
+   CONSTRAINT pk_categ_id PRIMARY KEY (categ_id)
 );
--- INSERT data into prod_category:
-insert into prod_category (categ_name)
-values ("COLD DRINKS"),
-   ("LASSI"),
-   ("ICE-CREAMS"),
-   ("BEVERAGES"),
-   ("NOODLES"),
-   ("BURGER"),
-   ("INDIAN BREAD"),
-   ("RICE"),
-   ("SALAD"),
-   ("MILK SHAKES"),
-   ("EGG"),
-   ("ROLLS"),
-   ("SANDWICHES"),
-   ("SOUP"),
-   ("PAV SPECIAL"),
-   ("JUICES"),
-   ("BIRYANI");
--- CREATE products table:
-create table if not exists products(
-   prod_id int not null auto_increment,
-   prod_name varchar(255) not null unique,
-   prod_categ_id int not null,
-   in_stock bool not null,
-   prod_desc varchar(255) default 'best selling',
-   unit_price float not null,
-   constraint pk_prod_id primary key (prod_id),
+
+-- Insert data into prod_category
+INSERT INTO prod_category (categ_name)
+VALUES
+   ('COLD DRINKS'),
+   ('LASSI'),
+   ('ICE-CREAMS'),
+   ('BEVERAGES'),
+   ('NOODLES'),
+   ('BURGER'),
+   ('INDIAN BREAD'),
+   ('RICE'),
+   ('SALAD'),
+   ('MILK SHAKES'),
+   ('EGG'),
+   ('ROLLS'),
+   ('SANDWICHES'),
+   ('SOUP'),
+   ('PAV SPECIAL'),
+   ('JUICES'),
+   ('BIRYANI');
+
+-- Create products table
+CREATE TABLE IF NOT EXISTS products (
+   prod_id INT NOT NULL AUTO_INCREMENT,
+   prod_name VARCHAR(255) NOT NULL UNIQUE,
+   prod_categ_id INT NOT NULL,
+   in_stock BOOL NOT NULL,
+   prod_desc VARCHAR(255) DEFAULT 'best selling',
+   unit_price FLOAT NOT NULL,
+   CONSTRAINT pk_prod_id PRIMARY KEY (prod_id),
    CONSTRAINT fk_prod_categ_id FOREIGN KEY (prod_categ_id) REFERENCES prod_category(categ_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
--- INSERT data into products:
-insert into products(
-      prod_name,
-      prod_categ_id,
-      in_stock,
-      prod_desc,
-      unit_price
-   )
-values("Mazza", 1, true, "Mazza: 500 ml", 45);
--- CREATE cust_order table:
-CREATE TABLE IF NOT EXISTS cust_order(
-   ord_id INT NOT NULL auto_increment,
+
+-- Insert data into products
+INSERT INTO products (prod_name, prod_categ_id, in_stock, prod_desc, unit_price)
+VALUES ('Mazza', 1, TRUE, 'Mazza: 500 ml', 45);
+
+-- Create cust_order table
+CREATE TABLE IF NOT EXISTS cust_order (
+   ord_id INT NOT NULL AUTO_INCREMENT,
    ord_date_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
    cust_id INT NOT NULL,
-   bill_amount int default null,
-   ord_bill varchar(255) default null,
-   ord_processed_by int not null,
-   constraint pk_ord_id primary key (ord_id),
+   bill_amount INT DEFAULT NULL,
+   ord_bill VARCHAR(255) DEFAULT NULL,
+   ord_processed_by INT NOT NULL,
+   CONSTRAINT pk_ord_id PRIMARY KEY (ord_id),
    CONSTRAINT fk_ordered_by_cust FOREIGN KEY (cust_id) REFERENCES customer(cust_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
--- INSERT data into cust_order:
--- insert into cust_order(cust_id, ord_processed_by)
--- values (1, 1);
--- CREATE ord_prod_relation_table table(for many to many relation between products and cust_order):
-CREATE TABLE IF NOT EXISTS ord_prod_relation_table(
-   ord_id int not NULL,
-   prod_id int not NULL,
-   quantity int not null,
-   unit_price int not NULL,
-   constraint pk_ord_id_prod_id primary key(ord_id, prod_id),
-   constraint fk_prod_is_in_ord FOREIGN key (ord_id) REFERENCES cust_order(ord_id) ON DELETE CASCADE ON UPDATE CASCADE,
-   constraint fk_ord_has_items FOREIGN key (prod_id) REFERENCES products(prod_id) ON DELETE CASCADE ON UPDATE CASCADE
+
+-- Create ord_prod_relation_table (for many-to-many relation between products and cust_order)
+CREATE TABLE IF NOT EXISTS ord_prod_relation_table (
+   ord_id INT NOT NULL,
+   prod_id INT NOT NULL,
+   quantity INT NOT NULL,
+   unit_price INT NOT NULL,
+   CONSTRAINT pk_ord_id_prod_id PRIMARY KEY (ord_id, prod_id),
+   CONSTRAINT fk_prod_is_in_ord FOREIGN KEY (ord_id) REFERENCES cust_order(ord_id) ON DELETE CASCADE ON UPDATE CASCADE,
+   CONSTRAINT fk_ord_has_items FOREIGN KEY (prod_id) REFERENCES products(prod_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
--- INSERT data into ord_prod_relation_table:
--- insert into ord_prod_relation_table (ord_id, prod_id, quantity, unit_price)
--- values (1, 1, 5, 100);
--- show values from the tables:
-SELECT *
-from cust_order;
-SELECT *
-from customer;
-SELECT *
-from ord_prod_relation_table;
-SELECT *
-from prod_category;
-SELECT *
-from products;
-SELECT *
-from user_auth;
-SELECT *
-from users;
--- INSERT data into user_auth(the below values inserted has admin privilages):
--- insert into user_auth(user_id, user_passw, authorized, verified)
--- values ((select user_id from users where user_email = "ayushjnv25@gmail.com"), "12345", true, true);
--- Created a view to easily retrieve information to generate bills:
-create or replace view billing_info as
-select ord_id,
-   prod_id as product_id,
+
+-- Insert data into ord_prod_relation_table
+-- INSERT INTO ord_prod_relation_table (ord_id, prod_id, quantity, unit_price)
+-- VALUES (1, 1, 5, 100);
+
+-- Create a view to easily retrieve information to generate bills
+CREATE OR REPLACE VIEW billing_info AS
+SELECT ord_id, prod_id AS product_id,
    (
-      select prod_name
-      from products
-      where prod_id = product_id
-   ) as prod_name,
-   quantity,
-   unit_price,
-   (unit_price * quantity) as total
-from ord_prod_relation_table;
+      SELECT prod_name
+      FROM products
+      WHERE prod_id = product_id
+   ) AS prod_name,
+   quantity, unit_price, (unit_price * quantity) AS total
+FROM ord_prod_relation_table;
+
+-- Show values from the tables
+SELECT * FROM cust_order;
+SELECT * FROM customer;
+SELECT * FROM ord_prod_relation_table;
+SELECT * FROM prod_category;
+SELECT * FROM products;
+SELECT * FROM user_auth;
+SELECT * FROM users;
+
+
+CREATE OR REPLACE VIEW billing_info AS
+SELECT ord_id, prod_id AS product_id,
+   (
+      SELECT prod_name
+      FROM products
+      WHERE prod_id = ord_prod_relation_table.prod_id
+   ) AS prod_name,
+   quantity, unit_price, (unit_price * quantity) AS total
+FROM ord_prod_relation_table;

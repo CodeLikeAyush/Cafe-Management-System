@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+
+  cafe-db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=@123
+    # env_file:
+    #   - .env
+    volumes:
+      - ./ayushcafe.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - 3307:3306
+
+  cafe-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    # depends_on:
+    #   - cafe-db
+    ports:
+      - 4000:4000
+    # volumes:
+    #   - .:/app
+    working_dir: /app
+    environment:
+      - ACCESS_TOKEN=3431ba8960559ee197d48b793af3a10cf724eb087d88b29e7976f65657261146c66ce94dc9b84e551aef79b7914a845debe9034413779913ff4d5d9f7622ee9f
+      - EMAIL=achkon@zohomail.in
+      - PASSWORD=7xQAV5K1Hvh0
+      - MYSQL_HOST=cafe-db
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=@123
+      - MYSQL_DB=ayushcafe
+    
+
+
+      
+
+
+
+
+
+
+
+
+    
+    
+    
+    
+

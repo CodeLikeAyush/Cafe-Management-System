@@ -75,7 +75,10 @@
         </div>
         <input type="text" id="myprodInput" onkeyup="filterProducts()" placeholder="Search by Name.."
             title="Type in a name">
-        <%- include('../partials/manage_prod_table.ejs'); %>
+        <div style="overflow: scroll;">
+            <%- include('../partials/manage_prod_table.ejs'); %>
+        </div>
+
 
 
 
@@ -86,7 +89,8 @@
         <div
             style="border: 1px solid #ddd;padding: 12px;font-size: 18px;display: block;height: 60px;margin-bottom: 10px;">
             <h2 style="float: left;font-weight: bold;color: green;">Create Order</h2>
-            <button onclick="document.getElementById('id06').style.display='block'"
+            <button
+                onclick="document.getElementById('id06').style.display='block';document.body.style.overflow = 'hidden';"
                 style="float: right;font-weight: bold;width: auto;padding: 10px 18px;background-color: green;color: white; border: none;cursor: pointer;">Place
                 Order
             </button>
@@ -113,7 +117,9 @@
         </div>
         <input type="text" id="mybillInput" onkeyup="filterBills()" placeholder="Search by Customer Name.."
             title="Type in a name">
-        <%- include('../partials/bills_table.ejs'); %>
+        <div style="overflow: scroll;">
+            <%- include('../partials/bills_table.ejs'); %>
+        </div>
 
 
 
@@ -125,7 +131,7 @@
             style="border: 1px solid #ddd;padding: 12px;font-size: 18px;display: block;height: 60px;margin-bottom: 10px;">
             <h2 style="float: left;font-weight: bold;color: green;">Manage Category</h2>
 
-            <button onclick="document.getElementById('id07').style.display='block'"
+            <button onclick="document.getElementById('id07').style.display='block';document.body.style.overflow = 'hidden';"
                 style="float: right;font-weight: bold;width: auto;padding: 10px 18px;background-color: green;color: white; border: none;cursor: pointer;">Add
                 New Catgory
             </button>
@@ -133,8 +139,9 @@
 
         <input type="text" id="mycategInput" onkeyup="filterCategory()" placeholder="Search by Category Name.."
             title="Type in a category">
-        <%- include('../partials/manage_categ_table'); %>
-
+        <div style="overflow: scroll;">
+            <%- include('../partials/manage_categ_table'); %>
+        </div>
     </div>
 
 

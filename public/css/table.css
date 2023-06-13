@@ -1,5 +1,7 @@
         /* Table styling------------------------------------------------------------------- */
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
 
@@ -31,9 +33,10 @@
         #categTable,
         #orderTable {
             border-collapse: collapse;
-            width: 100%;
+            width: 100vw;
             border: 1px solid #ddd;
             font-size: 18px;
+            overflow: scroll;
         }
 
         #productTable th,

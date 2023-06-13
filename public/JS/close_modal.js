@@ -25,13 +25,17 @@ window.onclick = function (event) {
         modal4.style.display = "none";
     }
     if (event.target == modal5) {
+        document.body.style.overflow = 'initial';
         modal5.style.display = "none";
     }
     if (event.target == modal6) {
         modal6.style.display = "none";
+        document.body.style.overflow = 'initial';
     }
     if (event.target == modal7) {
         modal7.style.display = "none";
+        document.body.style.overflow = 'initial';
+
     }
 }
 

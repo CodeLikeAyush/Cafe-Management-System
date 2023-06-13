@@ -11,7 +11,7 @@ body {
     margin: auto;
     border: 1px solid #ccc;
     background-color: #f1f1f1;
-    /* overflow-x: scroll; */
+    overflow: scroll;
     border-bottom: 5px solid green;
     margin-bottom: 5px;
 }
@@ -21,13 +21,7 @@ body {
     display: none;
 }
 
-/* Hide scrollbar for IE, Edge and Firefox */
-.tab {
-    -ms-overflow-style: none;
-    /* IE and Edge */
-    scrollbar-width: none;
-    /* Firefox */
-}
+
 
 
 /* Style the buttons inside the tab */
@@ -44,6 +38,7 @@ body {
     transition: 0.3s;
     font-size: 17px;
 }
+
 
 /* Change background color of buttons on hover */
 .tab button:hover {
