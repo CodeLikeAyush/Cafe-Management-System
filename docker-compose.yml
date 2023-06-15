@@ -10,7 +10,9 @@ services:
     # env_file:
     #   - .env
     volumes:
-      - ./ayushcafe.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./ayushcafe.sql:/docker-entrypoint-initdb.d/init.sql # bind-mount(host directory and container directory are in sync)(initializing the database)
+      - mysql_db_data:/var/lib/mysql # named-volume(persisting database entries)
+      # - /var/lib/mysql # anonymous volume docker will give it some random name. Better you don't use it(use named-volume instead)
     ports:
       - 3307:3306
 
@@ -34,20 +36,8 @@ services:
       - MYSQL_USER=root
       - MYSQL_PASSWORD=@123
       - MYSQL_DB=ayushcafe
-    
 
+volumes:
+  mysql_db_data: # named-volume
 
-      
-
-
-
-
-
-
-
-
-    
-    
-    
-    
 
