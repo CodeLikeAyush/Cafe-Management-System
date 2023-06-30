@@ -39,7 +39,7 @@ This project gave me a greate learning curve on implementing my theoretical skil
 ## Run Using Docker Container:
  * Download and install docker-desktop
  * In the root directory of the project(root directory has `package.json` file), run command:
- 
+
  ```cmd
    docker-compose up -d
  ```
@@ -63,8 +63,6 @@ This project gave me a greate learning curve on implementing my theoretical skil
 ## Database:
 
 <img  src ="./ayush-cafe-ER-Model.png" alt="ER-Model">
-
-`<img src="ayush-cafe-ER-Model.png" alt**="ER-Model">`
 
 * Open `MySql Command Line Client` login and run the following MySql Script to create and setup database used in the project:
 
