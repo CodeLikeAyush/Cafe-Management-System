@@ -36,20 +36,22 @@ This project gave me a greate learning curve on implementing my theoretical skil
 
 **Server:** Node, Express, MySql
 
-## Run Using Docker Container:
- * Download and install docker-desktop
- * In the root directory of the project(root directory has `package.json` file), run command:
-
- ```cmd
-   docker-compose up -d
- ```
- * To stop the container:
- 
- ```cmd
-   docker-compose down
-```
 
 ## Before you Run Locally
+* You will need Email credentials for mail services used in the project.
+
+**Note:** If you have SMTP server, then you can use those credentials. Since I dont't have I have used credentials of **Application-Specific Passwords** from [Zoho Mail Service](https://mail.zoho.in/zm/#mail/folder/inbox).
+
+ **To get your credentials:**
+
+* Signup for [Zoho Mail](https://www.zoho.com/mail/signup.html) for free(***Note: not a promotion😂***)
+* Navigate to you **My Profile** icon
+* Then to **My Account**
+* Then to **Security**
+* Then to **App Passwords**
+* You will see **Application-Specific Passwords**
+* Here you can generate **Generate New Password**
+* Use these credentials as your `Email` and `PASSWORD` in `.env` file
 
 * Working fine for:
 
@@ -63,6 +65,28 @@ This project gave me a greate learning curve on implementing my theoretical skil
 ## Database:
 
 <img  src ="./ayush-cafe-ER-Model.png" alt="ER-Model">
+
+
+
+## Run Locally
+
+### Run Using Docker Container:
+ * Download and install docker-desktop
+ * Add your mail-credentials and other environment-variables in `docker-compose.yml` file
+ * In the root directory of the project(root directory has `package.json` file), run command:
+
+ ```cmd
+   docker-compose up -d
+ ```
+ Navigate to `http://localhost:4000/`. You will see the web app online.
+
+ * To stop the container:
+ 
+ ```cmd
+   docker-compose down
+```
+
+### Run Without Using Docker Container:
 
 * Open `MySql Command Line Client` login and run the following MySql Script to create and setup database used in the project:
 
@@ -218,22 +242,7 @@ SELECT ord_id, prod_id AS product_id,
 FROM ord_prod_relation_table;
 
 ```
-* You will need Email credentials for mail services used in the project.
 
-**Note:** If you have SMTP server, then you can use those credentials. Since I dont't have I have used credentials of **Application-Specific Passwords** from [Zoho Mail Service](https://mail.zoho.in/zm/#mail/folder/inbox).
-
- **To get your credentials:**
-
-* Signup for [Zoho Mail](https://www.zoho.com/mail/signup.html) for free(***Note: not a promotion😂***)
-* Navigate to you **My Profile** icon
-* Then to **My Account**
-* Then to **Security**
-* Then to **App Passwords**
-* You will see **Application-Specific Passwords**
-* Here you can generate **Generate New Password**
-* Use these credentials as your `Email` and `PASSWORD` in `.env` file
-
-## Run Locally
 
 Clone the project
 
@@ -254,25 +263,29 @@ Install dependencies
 ```
 
 Create a `.env` file in root directory of the project(Note: root directory has files such as: `package.json` etc. ) and add these contents to the file:
-(Note: add your own credentials the below shown is just for reference. Dont change key of the environment variables)
+(Note: add your own credentials. Example shown below is just for reference. Don't change key of the environment variables)
 
 ```bash
 // server
 PORT = 8080
 
 //connection
-DB_NAME = ayushcafe
-DB_HOST = localhost
 DB_PORT  = 3306
-DB_USERNAME = root
-DB_PASSWORD = @123
-
+MYSQL_ROOT_PASSWORD = root
 
 ACCESS_TOKEN = 3431ba8960559ee197d48b793af3a10cf724eb087d88b29e7976f65657261146c66ce94dc9b84e551aef79b7914a845debe9034413779913ff4d5d9f7622ee9f
-
 EMAIL = achkon@zohomail.in
 PASSWORD = A2rJLwmz3zHe
+
+MYSQL_HOST = localhost
+MYSQL_USER = root
+MYSQL_PASSWORD = root
+MYSQL_DB = ayushcafe
 ```
+
+
+
+
 
 Start the server
 
