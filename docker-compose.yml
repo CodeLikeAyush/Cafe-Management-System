@@ -6,7 +6,7 @@ services:
     image: mysql:8.0
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=@123
+      - MYSQL_ROOT_PASSWORD=root
     # env_file:
     #   - .env
     volumes:
@@ -34,7 +34,7 @@ services:
       - PASSWORD=7xQAV5K1Hvh0
       - MYSQL_HOST=cafe-db
       - MYSQL_USER=root
-      - MYSQL_PASSWORD=@123
+      - MYSQL_PASSWORD=root
       - MYSQL_DB=ayushcafe
 
 volumes:

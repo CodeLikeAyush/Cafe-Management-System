@@ -1,12 +1,13 @@
 # Cafe-Management-System
-End to end cafe management system using NodeJs Express, MySql, ejs, HTML, CSS and JavaScript
 
+End to end cafe management system using NodeJs Express, MySql, ejs, HTML, CSS and JavaScript
 
 It's an end to end Cafe Management System Web-Application with backend. I got inspiration to work on this project when I happened to visit a night canteen in my college and I saw their Billing-System. I was a desktop-app. Using my `web development` skills I developed this project within `24 days to complete` a working version of this project. Later I made some `functionality and UI improvements` as well as some `bug fixes`.
 
 This project gave me a greate learning curve on implementing my theoretical skills which i learning throughout my web development journey.
 
 ### Features:
+
 * User can `SignUp`
 * Then user will receive an `OTP` on his email
 * Then user will `verify account` using `OTP`
@@ -15,6 +16,7 @@ This project gave me a greate learning curve on implementing my theoretical skil
 * User will see a `Dashboard` screen
 
 ### User Interactions:
+
 * **Admin Dashboard:** it will show number of `Total Category` `Total Product` `Total Order`
 * **Manage Products:** here user can `add new products` `search Products` `delete products` `edit products` `update stock of products`
 * **Create Order:** here user can create a fresh new Order
@@ -22,12 +24,11 @@ This project gave me a greate learning curve on implementing my theoretical skil
 * **Manage Category:** here user can `add new Category` `delete Category` `search for Categories`
 
 ### Technical Features:
+
 * Password hashing using `bcrypt.js`
 * Account verification using `OTP`
 * Session Management using `Cookies` and `jsonwebtoken`
 * Every route is protected and only authorized and authenticated user will be able to make any changes
-
-
 
 ## Tech Stack Used
 
@@ -35,21 +36,38 @@ This project gave me a greate learning curve on implementing my theoretical skil
 
 **Server:** Node, Express, MySql
 
+## Run Using Docker Container:
+ * Download and install docker-desktop
+ * In the root directory of the project(root directory has `package.json` file), run command:
+ 
+ ```cmd
+   docker-compose up -d
+ ```
+ * To stop the container:
+ 
+ ```cmd
+   docker-compose down
+```
 
 ## Before you Run Locally
 
 * Working fine for:
-   * Node Version: v18.16.0
-   * NPM Version: 9.5.1
-   * Server version: 8.0.31 MySQL Community Server - GPL
 
-
-
+  * Node Version: v18.16.0
+  * NPM Version: 9.5.1
+  * Server version: 8.0.31 MySQL Community Server - GPL
 * Download and install **[NodeJs](https://nodejs.org/en/download)**
 * Download and install **[Git](https://git-scm.com/downloads)**
 * Download and install **[MySql](https://dev.mysql.com/downloads/installer/)**
 
+## Database:
+
+<img  src ="./ayush-cafe-ER-Model.png" alt="ER-Model">
+
+`<img src="ayush-cafe-ER-Model.png" alt**="ER-Model">`
+
 * Open `MySql Command Line Client` login and run the following MySql Script to create and setup database used in the project:
+
 ```sql
 -- drop ayushcafe DATABASE if it not exists:
 DROP DATABASE if exists ayushcafe;
@@ -208,7 +226,6 @@ select ord_id,
 from ord_prod_relation_table;
 ```
 
-
 * You will need Email credentials for mail services used in the project.
 
 **Note:** If you have SMTP server, then you can use those credentials. Since I dont't have I have used credentials of **Application-Specific Passwords** from [Zoho Mail Service](https://mail.zoho.in/zm/#mail/folder/inbox).
@@ -224,9 +241,6 @@ from ord_prod_relation_table;
 * Here you can generate **Generate New Password**
 * Use these credentials as your `Email` and `PASSWORD` in `.env` file
 
-
-
-
 ## Run Locally
 
 Clone the project
@@ -239,14 +253,13 @@ Go to the project directory(**Note:** project directory has files like: `package
 
 ```bash
   cd Cafe-Management-System
-``` 
+```
 
 Install dependencies
 
 ```bash
   npm install
 ```
-
 
 Create a `.env` file in root directory of the project(Note: root directory has files such as: `package.json` etc. ) and add these contents to the file:
 (Note: add your own credentials the below shown is just for reference. Dont change key of the environment variables)
@@ -274,12 +287,10 @@ Start the server
 ```bash
   npm start
 ```
+
 **Note:** There should not be any other server running on `port: 8080`
 
 Navigate to `http://localhost:8080/`. You will see the web app online.
-
-
-
 
 ## Environment Variables
 
@@ -307,9 +318,4 @@ To run this project, you will need to add the following environment variables to
 
 ## License
 
-
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
-
-
-
-
