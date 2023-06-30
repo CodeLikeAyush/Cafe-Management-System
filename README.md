@@ -53,14 +53,7 @@ This project gave me a greate learning curve on implementing my theoretical skil
 * Here you can generate **Generate New Password**
 * Use these credentials as your `Email` and `PASSWORD` in `.env` file
 
-* Working fine for:
 
-  * Node Version: v18.16.0
-  * NPM Version: 9.5.1
-  * Server version: 8.0.31 MySQL Community Server - GPL
-* Download and install **[NodeJs](https://nodejs.org/en/download)**
-* Download and install **[Git](https://git-scm.com/downloads)**
-* Download and install **[MySql](https://dev.mysql.com/downloads/installer/)**
 
 ## Database:
 
@@ -87,6 +80,16 @@ This project gave me a greate learning curve on implementing my theoretical skil
 ```
 
 ### Run Without Using Docker Container:
+* Project is Working fine for:
+
+  * Node Version: v18.16.0
+  * NPM Version: 9.5.1
+  * Server version: 8.0.31 MySQL Community Server - GPL
+  (So if you get some issue, then download and install above mention versions of tool otherwise you can download and install the latest tools)
+
+* Download and install **[NodeJs](https://nodejs.org/en/download)**
+* Download and install **[Git](https://git-scm.com/downloads)**
+* Download and install **[MySql](https://dev.mysql.com/downloads/installer/)**
 
 * Open `MySql Command Line Client` login and run the following MySql Script to create and setup database used in the project:
 
