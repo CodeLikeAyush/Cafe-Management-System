@@ -308,7 +308,7 @@ To run this project, you will need to add the following environment variables to
 `EMAIL`-> your email
 `PASSWORD`-> app PASSWORD for this email
 
-**Note:** If you have SMTP server, then you can use those credentials. Since I dont't have I have used credentials of **Application-Specific Passwords** from [Zoho Mail Service](https://mail.zoho.in/zm/#mail/folder/inbox).
+**Note:** If you have SMTP server, then you can use those credentials. Since I don't have I have used credentials of **Application-Specific Passwords** from [Zoho Mail Service](https://mail.zoho.in/zm/#mail/folder/inbox).
 
  **To get your credentials:**
 
