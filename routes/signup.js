@@ -6,7 +6,6 @@ const sendMail = require('../sendMail');
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-// const cookieParser = require('cookie-parser');
 var multer = require('multer');
 var upload = multer();
 

@@ -4,7 +4,7 @@ End to end cafe management system using NodeJs Express, MySql, ejs, HTML, CSS an
 
 It's an end to end Cafe Management System Web-Application with backend. I got inspiration to work on this project when I happened to visit a night canteen in my college and I saw their Billing-System. I was a desktop-app. Using my `web development` skills I developed this project within `24 days to complete` a working version of this project. Later I made some `functionality and UI improvements` as well as some `bug fixes`.
 
-This project gave me a greate learning curve on implementing my theoretical skills which i learning throughout my web development journey.
+This project gave me a greate learning curve on implementing my theoretical skills which I learnt throughout my web development journey.
 
 ### Features:
 

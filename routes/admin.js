@@ -11,7 +11,6 @@ require('dotenv').config();
 var multer = require('multer');
 var upload = multer();
 
-// const jwt = require('jsonwebtoken');
 
 
 
@@ -34,20 +33,7 @@ route.get('/', verify, async (req, res) => {
     })
 })
 
-// // +++++++++++++++++++++++++++++++++++++++++++/dashboard/manage_product++++++++++++++++++++++++++++++
-// route.get('', verify, async (req, res) => {
-//     // let query = 'select COUNT(distinct cat.category_id) as cat_count,COUNT(distinct prod.product_id) as prod_count from prod_category as cat, products as prod'
-//     let query = 'select COUNT(distinct cat.category_id) as cat_count,COUNT(distinct prod.product_id) as prod_count from prod_category as cat, products as prod'
 
-//     connection.query(query, (err, results, fields) => {
-//         if (!err) {
-//             res.render("pages/admin_dashboard", { prod_count: results[0].prod_count, categ_count: results[0].cat_count });
-//         } else {
-//             console.log(err)
-//             return res.status(500).json(err);
-//         }
-//     })
-// })
 
 // +++++++++++++++++++++++++++++++++++++++++++/dashboard/manage_product++++++++++++++++++++++++++++++
 route.get('/manage_product', verify, async (req, res) => {
@@ -90,10 +76,7 @@ route.patch('/manage_product/toggleStock', verify, async (req, res) => {
             res.json({ status: "danger", message: "Product Stock Update Failed..." })
         }
     })
-    // res.status(200).json({ message: req.body })
-    // console.log(req.url)
-    // res.send(req.url)
-
+    
 })
 //+++++++++++++++++++++++++++++++++++++delete product+++++++++++++++++++++++++++++++++++++++++++++
 route.delete('/manage_product/delete_product', verify, async (req, res) => {
@@ -151,12 +134,10 @@ route.get('/manage_product/edit_prod', verify, async (req, res) => {
         console.log(results)
         if (!err) {
             res.json(results)
-            // res.json({ status: "success", message: "Product Stock Updated..." })
 
         }
         else {
             console.log(err);
-            // res.json({ status: "error", message: "Product Stock Update Failed..." })
 
         }
     })
@@ -197,7 +178,6 @@ route.get('/create_order', verify, async (req, res) => {
         // console.log(results)
         if (!err) {
             res.json(results)
-            // res.json({ status: "success", message: "Product Stock Updated..." })
 
         }
         else {
@@ -314,9 +294,7 @@ route.post('/manage_category/add_category', verify, upload.fields([]), async (re
 
     // const prod_id = req.body.id;
     const category_name = (req.body.category).toLocaleUpperCase();
-    // const prod_categ = (req.body.category).toLocaleUpperCase();
-    // const prod_desc = (req.body.description).toLocaleUpperCase();
-    // const prod_price = req.body.price;
+    
 
     let query = 'insert into prod_category (categ_name) VALUES (?)'
 

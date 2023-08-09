@@ -1,13 +1,9 @@
 const connection = require('../connection');
-// const sendMail = require('../sendMail');
-// const secretKey = require('../secretKey');
-// const verify = require('../verify');
 
 const express = require('express');
 const jwt = require('jsonwebtoken');
 var multer = require('multer');
 var upload = multer();
-// const cookieParser = require('cookie-parser');
 
 
 
@@ -39,7 +35,6 @@ route.post('/', upload.fields([]), (req, res) => {
                     if (!err) {
                         console.log(results);
                         res.json({ status: "success", message: "Email Verification Successful" })
-                        // res.redirect('/admin');
 
                     }
                     else {

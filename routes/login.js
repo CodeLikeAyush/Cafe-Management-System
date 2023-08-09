@@ -1,14 +1,10 @@
 const connection = require('../connection');
-// const sendMail = require('../sendMail');
-// const secretKey = require('../secretKey');
-// const verify = require('../verify');
 
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 var multer = require('multer');
 var upload = multer();
-// const cookieParser = require('cookie-parser');
 
 
 
