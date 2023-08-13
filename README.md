@@ -1,329 +1,113 @@
-# Cafe-Management-System
+# Cafe Management System
 
-End to end cafe management system using NodeJs Express, MySql, ejs, HTML, CSS and JavaScript
+Welcome to the Cafe Management System! This web application is an end-to-end solution built using Node.js, Express, MySQL, ejs, HTML, CSS, and JavaScript. I was inspired to create this project after visiting a night canteen in my college, where I noticed their billing system was a desktop application. Leveraging my web development skills, I completed this project in just 24 days, and I've since made functionality improvements, UI enhancements, and bug fixes.
 
-It's an end to end Cafe Management System Web-Application with backend. I got inspiration to work on this project when I happened to visit a night canteen in my college and I saw their Billing-System. I was a desktop-app. Using my `web development` skills I developed this project within `24 days to complete` a working version of this project. Later I made some `functionality and UI improvements` as well as some `bug fixes`.
+This project has been a tremendous learning experience, allowing me to apply the theoretical knowledge I've gained throughout my web development journey.
 
-This project gave me a greate learning curve on implementing my theoretical skills which I learnt throughout my web development journey.
+## Features:
 
-### Features:
+* User Registration and Account Verification
+* Admin Authorization
+* User Login with Dashboard Access
 
-* User can `SignUp`
-* Then user will receive an `OTP` on his email
-* Then user will `verify account` using `OTP`
-* Then `admin` will `authorize` that `new user`
-* Now user can `login`
-* User will see a `Dashboard` screen
+## User Interactions:
 
-### User Interactions:
+* Admin Dashboard: Displaying Total Categories, Total Products, and Total Orders
+* Manage Products: Add new products, search products, delete products, edit products, and update stock
+* Create Order: Initiate a new order
+* View Bills: Access order bills and search for specific bills
+* Manage Category: Add new categories, delete categories, and search for categories
 
-* **Admin Dashboard:** it will show number of `Total Category` `Total Product` `Total Order`
-* **Manage Products:** here user can `add new products` `search Products` `delete products` `edit products` `update stock of products`
-* **Create Order:** here user can create a fresh new Order
-* **View Bills:** here user can see Bills of Order created `search Bills`
-* **Manage Category:** here user can `add new Category` `delete Category` `search for Categories`
+## Technical Features:
 
-### Technical Features:
+* Password hashing using bcrypt.js
+* Account verification using OTP
+* Session management using Cookies and JSON Web Tokens (JWT)
+* Protected routes for authenticated and authorized users
 
-* Password hashing using `bcrypt.js`
-* Account verification using `OTP`
-* Session Management using `Cookies` and `jsonwebtoken`
-* Every route is protected and only authorized and authenticated user will be able to make any changes
-
-## Tech Stack Used
+## Tech Stack:
 
 **Client:** HTML, CSS, JavaScript, ejs
 
-**Server:** Node, Express, MySql
+**Server:** Node.js, Express, MySQL
 
+## Before You Run Locally:
 
-## Before you Run Locally
-* You will need Email credentials for mail services used in the project.
+Before running this project locally, you need email credentials for the mail services used in the project. Here's how to get your credentials:
 
-**Note:** If you have SMTP server, then you can use those credentials. Since I dont't have I have used credentials of **Application-Specific Passwords** from [Zoho Mail Service](https://mail.zoho.in/zm/#mail/folder/inbox).
+1. Signup for [Zoho Mail](https://www.zoho.com/mail/signup.html) for free.
+2. Navigate to your **My Profile** icon.
+3. Go to **My Account**.
+4. Access the **Security** section.
+5. Find **App Passwords** and generate a new password.
+6. Use these credentials (Email and PASSWORD) in the `.env` file.
 
- **To get your credentials:**
-
-* Signup for [Zoho Mail](https://www.zoho.com/mail/signup.html) for free(***Note: not a promotion😂***)
-* Navigate to you **My Profile** icon
-* Then to **My Account**
-* Then to **Security**
-* Then to **App Passwords**
-* You will see **Application-Specific Passwords**
-* Here you can generate **Generate New Password**
-* Use these credentials as your `Email` and `PASSWORD` in `.env` file
-
-
-
-## Database:
-
-<img  src ="./ayush-cafe-ER-Model.png" alt="ER-Model">
-
-
-
-## Run Locally
+## Run Locally:
 
 ### Run Using Docker Container:
- * Download and install docker-desktop
- * Add your mail-credentials and other environment-variables in `docker-compose.yml` file
- * In the root directory of the project(root directory has `package.json` file), run command:
 
- ```cmd
-   docker-compose up -d
- ```
- Navigate to `http://localhost:4000/`. You will see the web app online.
+1. Download and install Docker Desktop.
+2. Add your mail credentials and other environment variables in `docker-compose.yml`.
+3. In the root directory of the project (where `package.json` is located), run the following command:
 
- * To stop the container:
- 
- ```cmd
-   docker-compose down
+```bash
+docker-compose up -d
+```
+
+Navigate to `http://localhost:4000/` to access the web app.
+
+To stop the container:
+
+```bash
+docker-compose down
 ```
 
 ### Run Without Using Docker Container:
-* Project is Working fine for:
 
-  * Node Version: v18.16.0
-  * NPM Version: 9.5.1
-  * Server version: 8.0.31 MySQL Community Server - GPL
-  (So if you get some issue, then download and install above mention versions of tool otherwise you can download and install the latest tools)
-
-* Download and install **[NodeJs](https://nodejs.org/en/download)**
-* Download and install **[Git](https://git-scm.com/downloads)**
-* Download and install **[MySql](https://dev.mysql.com/downloads/installer/)**
-
-* Open `MySql Command Line Client` login and run the following MySql Script to create and setup database used in the project:
-
-```sql
--- Drop ayushcafe database if it exists
-DROP DATABASE IF EXISTS ayushcafe;
-
--- Create ayushcafe database
-CREATE DATABASE ayushcafe;
-
--- Use ayushcafe database
-USE ayushcafe;
-
--- Create users table
-CREATE TABLE IF NOT EXISTS users (
-   user_id INT NOT NULL AUTO_INCREMENT,
-   user_name VARCHAR(255) NOT NULL,
-   user_email VARCHAR(255) NOT NULL UNIQUE,
-   CONSTRAINT pk_user_id PRIMARY KEY (user_id)
-);
-
--- Inser into users table
-INSERT INTO users (user_name, user_email)
-VALUES ("Ayush Raj", "ayush@gmail.com");
-
-
--- Create user_auth table
-CREATE TABLE IF NOT EXISTS user_auth (
-   auth_id INT NOT NULL AUTO_INCREMENT,
-   user_id INT NOT NULL UNIQUE,
-   user_passw VARCHAR(255) NOT NULL,
-   email_otp VARCHAR(10) DEFAULT NULL,
-   otp_dt_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-   authorized BOOL DEFAULT 0,
-   verified BOOL DEFAULT 0,
-   CONSTRAINT pk_auth_id PRIMARY KEY (auth_id),
-   CONSTRAINT fk_auth_id_of_user_id FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
--- Insert data into user_auth
-INSERT INTO user_auth (user_id, user_passw, authorized, verified)
-VALUES (1, '12345', TRUE, TRUE);
-
--- Create customer table
-CREATE TABLE IF NOT EXISTS customer (
-   cust_id INT NOT NULL AUTO_INCREMENT,
-   cust_name VARCHAR(255) NOT NULL,
-   email VARCHAR(255) NOT NULL,
-   mob_no VARCHAR(255) NOT NULL,
-   CONSTRAINT pk_cust_id PRIMARY KEY (cust_id)
-);
-
--- Create prod_category table
-CREATE TABLE IF NOT EXISTS prod_category (
-   categ_id INT NOT NULL AUTO_INCREMENT,
-   categ_name VARCHAR(255) NOT NULL UNIQUE,
-   CONSTRAINT pk_categ_id PRIMARY KEY (categ_id)
-);
-
--- Insert data into prod_category
-INSERT INTO prod_category (categ_name)
-VALUES
-   ('COLD DRINKS'),
-   ('LASSI'),
-   ('ICE-CREAMS'),
-   ('BEVERAGES'),
-   ('NOODLES'),
-   ('BURGER'),
-   ('INDIAN BREAD'),
-   ('RICE'),
-   ('SALAD'),
-   ('MILK SHAKES'),
-   ('EGG'),
-   ('ROLLS'),
-   ('SANDWICHES'),
-   ('SOUP'),
-   ('PAV SPECIAL'),
-   ('JUICES'),
-   ('BIRYANI');
-
--- Create products table
-CREATE TABLE IF NOT EXISTS products (
-   prod_id INT NOT NULL AUTO_INCREMENT,
-   prod_name VARCHAR(255) NOT NULL UNIQUE,
-   prod_categ_id INT NOT NULL,
-   in_stock BOOL NOT NULL,
-   prod_desc VARCHAR(255) DEFAULT 'best selling',
-   unit_price FLOAT NOT NULL,
-   CONSTRAINT pk_prod_id PRIMARY KEY (prod_id),
-   CONSTRAINT fk_prod_categ_id FOREIGN KEY (prod_categ_id) REFERENCES prod_category(categ_id) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
--- Insert data into products
-INSERT INTO products (prod_name, prod_categ_id, in_stock, prod_desc, unit_price)
-VALUES ('Mazza', 1, TRUE, 'Mazza: 500 ml', 45);
-
--- Create cust_order table
-CREATE TABLE IF NOT EXISTS cust_order (
-   ord_id INT NOT NULL AUTO_INCREMENT,
-   ord_date_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-   cust_id INT NOT NULL,
-   bill_amount INT DEFAULT NULL,
-   ord_bill VARCHAR(255) DEFAULT NULL,
-   ord_processed_by INT NOT NULL,
-   CONSTRAINT pk_ord_id PRIMARY KEY (ord_id),
-   CONSTRAINT fk_ordered_by_cust FOREIGN KEY (cust_id) REFERENCES customer(cust_id) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
--- Create ord_prod_relation_table (for many-to-many relation between products and cust_order)
-CREATE TABLE IF NOT EXISTS ord_prod_relation_table (
-   ord_id INT NOT NULL,
-   prod_id INT NOT NULL,
-   quantity INT NOT NULL,
-   unit_price INT NOT NULL,
-   CONSTRAINT pk_ord_id_prod_id PRIMARY KEY (ord_id, prod_id),
-   CONSTRAINT fk_prod_is_in_ord FOREIGN KEY (ord_id) REFERENCES cust_order(ord_id) ON DELETE CASCADE ON UPDATE CASCADE,
-   CONSTRAINT fk_ord_has_items FOREIGN KEY (prod_id) REFERENCES products(prod_id) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
--- Insert data into ord_prod_relation_table
--- INSERT INTO ord_prod_relation_table (ord_id, prod_id, quantity, unit_price)
--- VALUES (1, 1, 5, 100);
-
--- Create a view to easily retrieve information to generate bills
-CREATE OR REPLACE VIEW billing_info AS
-SELECT ord_id, prod_id AS product_id,
-   (
-      SELECT prod_name
-      FROM products
-      WHERE prod_id = product_id
-   ) AS prod_name,
-   quantity, unit_price, (unit_price * quantity) AS total
-FROM ord_prod_relation_table;
-
--- Show values from the tables
-SELECT * FROM cust_order;
-SELECT * FROM customer;
-SELECT * FROM ord_prod_relation_table;
-SELECT * FROM prod_category;
-SELECT * FROM products;
-SELECT * FROM user_auth;
-SELECT * FROM users;
-
-
-CREATE OR REPLACE VIEW billing_info AS
-SELECT ord_id, prod_id AS product_id,
-   (
-      SELECT prod_name
-      FROM products
-      WHERE prod_id = ord_prod_relation_table.prod_id
-   ) AS prod_name,
-   quantity, unit_price, (unit_price * quantity) AS total
-FROM ord_prod_relation_table;
-
-```
-
-
-Clone the project
+1. Make sure you have Node.js, Git, and MySQL installed.
+2. Clone the project:
 
 ```bash
-  git clone https://github.com/CodeLikeAyush/Cafe-Management-System.git
+git clone https://github.com/CodeLikeAyush/Cafe-Management-System.git
 ```
 
-Go to the project directory(**Note:** project directory has files like: `package.json` `package-lock.json` etc.)
+3. Go to the project directory:
 
 ```bash
-  cd Cafe-Management-System
+cd Cafe-Management-System
 ```
 
-Install dependencies
+4. Install dependencies:
 
 ```bash
-  npm install
+npm install
 ```
 
-Create a `.env` file in root directory of the project(Note: root directory has files such as: `package.json` etc. ) and add these contents to the file:
-(Note: add your own credentials. Example shown below is just for reference. Don't change key of the environment variables)
+5. Create a `.env` file in the root directory of the project and add the required environment variables.
+
+6. Start the server:
 
 ```bash
-// server
-PORT = 8080
-
-//connection
-DB_PORT  = 3306
-MYSQL_ROOT_PASSWORD = root
-
-ACCESS_TOKEN = 3431ba8960559ee197d48b793af3a10cf724eb087d88b29e7976f65657261146c66ce94dc9b84e551aef79b7914a845debe9034413779913ff4d5d9f7622ee9f
-EMAIL = achkon@zohomail.in
-PASSWORD = A2rJLwmz3zHe
-
-MYSQL_HOST = localhost
-MYSQL_USER = root
-MYSQL_PASSWORD = root
-MYSQL_DB = ayushcafe
+npm start
 ```
 
+Navigate to `http://localhost:8080/` to see the web app online.
 
+## Database:
 
+![ER Model](./ayush-cafe-ER-Model.png)
 
+## Environment Variables:
 
-Start the server
+In your `.env` file, you should have the following environment variables:
 
-```bash
-  npm start
-```
+- `DB_USERNAME`: Database username
+- `DB_PASSWORD`: Database password
+- `EMAIL`: Your email
+- `PASSWORD`: App-specific password for the specified email (from Zoho Mail or similar)
 
-**Note:** There should not be any other server running on `port: 8080`
-
-Navigate to `http://localhost:8080/`. You will see the web app online.
-
-## Environment Variables
-
-To run this project, you will need to add the following environment variables to your .env file
-
-`DB_USERNAME`-> user name of database
-
-`DB_PASSWORD` -> PASSWORD of database
-
-`EMAIL`-> your email
-`PASSWORD`-> app PASSWORD for this email
-
-**Note:** If you have SMTP server, then you can use those credentials. Since I don't have I have used credentials of **Application-Specific Passwords** from [Zoho Mail Service](https://mail.zoho.in/zm/#mail/folder/inbox).
-
- **To get your credentials:**
-
-* Signup for [Zoho Mail](https://www.zoho.com/mail/signup.html) for free(***Note: not a promotion😂***)
-* Navigate to you **My Profile** icon
-* Then to **My Account**
-* Then to **Security**
-* Then to **App Passwords**
-* You will see **Application-Specific Passwords**
-* Here you can generate **Generate New Password**
-* Use these credentials as your `Email` and `PASSWORD` in `.env` file
-
-## License
+## License:
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+
+Feel free to explore, modify, and use this project as you wish. Please refer to the [MIT License](https://choosealicense.com/licenses/mit/) for details. Happy coding! 😊
