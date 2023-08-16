@@ -8,7 +8,7 @@ const sendMail = async (email, subject, html) => {
     try {
         console.log(email)
 
-        const transport = nodemailer.createTransport({
+        const transporter = nodemailer.createTransport({
             host: "smtp.zoho.in",
             secure: true,
             port: 465,
@@ -25,7 +25,7 @@ const sendMail = async (email, subject, html) => {
             html: html
         }
 
-        const result = await transport.sendMail(mailOptions);
+        const result = await transporter.sendMail(mailOptions);
         console.log(result);
         return result
 
